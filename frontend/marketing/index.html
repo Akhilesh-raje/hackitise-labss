@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackitise Labs | Advanced Cybersecurity Intelligence & Defense</title>
+    <meta name="description" content="Hackitise Labs specializes in advanced cybersecurity training, consulting, and AI-powered threat intelligence. ISO 27001 Certified, Govt Affiliated defense intelligence.">
+    <meta name="keywords" content="cybersecurity, VAPT, threat intelligence, cyber training, DFIR, zero-day defense, Hackitise Labs, Raj Aryan, Aman">
+    <meta property="og:title" content="Hackitise Labs | Neutralizing Global Threats">
+    <meta property="og:description" content="We don't just detect threats – we neutralize them. Advanced defense for enterprises and government institutions.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="/" class="nav-logo">Hackitise<span>Labs</span></a>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#products">Products</a>
+                <a href="#cases">Impact</a>
+                <a href="#contact">Contact</a>
+                <a href="#audit" class="btn btn-primary btn-sm">Get Audit</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION (SPLIT LAYOUT) -->
+    <header class="hero">
+        <canvas id="hero-particles"></canvas>
+        <div class="container hero-split">
+            <!-- Left Content -->
+            <div class="hero-content reveal">
+                <p class="hero-tag">
+                    <span class="pulse-dot"></span>
+                    Hackitise Labs – Cyber Intelligence
+                </p>
+                <h1>We Don't Just Detect Threats —<br>We <span class="gradient-text">Neutralize</span> Them</h1>
+                <p class="subtitle">Advanced cybersecurity training, consulting, and AI-powered threat intelligence.</p>
+                <p class="hero-typing-wrap">Specializing in: <span class="hero-typing gradient-text"></span><span class="cursor">|</span></p>
+                <div class="cta-group-left">
+                    <a href="#audit" class="btn btn-primary btn-large btn-glow">Get Security Audit</a>
+                    <a href="#training" class="btn btn-secondary btn-large">Start Learning</a>
+                </div>
+            </div>
+
+            <!-- Right: Animated Live Intercept Card -->
+            <div class="hero-visual reveal">
+                <div class="intercept-card">
+                    <!-- Glow BG -->
+                    <div class="intercept-glow"></div>
+                    <!-- Header -->
+                    <div class="intercept-header">
+                        <div class="intercept-title">
+                            <span class="pulse-dot pulse-red"></span>
+                            LIVE INTERCEPT
+                        </div>
+                        <div class="intercept-node">NODE: HX-992</div>
+                    </div>
+                    <!-- Spinner -->
+                    <div class="intercept-body">
+                        <div class="spinner-ring spin-slow">
+                            <div class="spinner-ring-inner"></div>
+                        </div>
+                        <div class="spinner-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                    </div>
+                    <!-- Logs -->
+                    <div class="intercept-logs">
+                        <div class="log-line"><span class="log-sys">sys&gt;</span> Analyzing deep packet stream...</div>
+                        <div class="log-line"><span class="log-warn">warn&gt;</span> Anomaly detected at 192.168.1.105</div>
+                        <div class="log-line"><span class="log-crit">crit&gt;</span> Neutralizing unauthorized execution... <span class="log-ok">OK</span></div>
+                    </div>
+                </div>
+                <!-- Floating badge -->
+                <div class="floating-badge bounce-slow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust Signals bar -->
+        <div class="container">
+            <div class="hero-trust-signals reveal">
+                <span>✔ ISO 27001 Certified</span>
+                <span>✔ Govt Affiliated</span>
+                <span>✔ Trusted by Institutions</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. TRUST BADGES -->
+    <section class="trust divider bg-light">
+        <div class="container text-center">
+            <p class="section-label reveal">Trusted & Recognized By</p>
+            <div class="logo-grid reveal">
+                <div class="logo-placeholder">DPIIT</div>
+                <div class="logo-placeholder">ISO 27001</div>
+                <div class="logo-placeholder">Startup India</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SERVICES -->
+    <section class="services section-padding" id="services">
+        <div class="container">
+            <h2 class="section-title text-center reveal">What We Do</h2>
+            <div class="grid-3 mt-4">
+                <div class="card reveal">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Cybersecurity Consulting</h3>
+                    <p>Designed for enterprises and startups.</p>
+                    <ul class="feature-list">
+                        <li>VAPT (Web, Mobile, API)</li>
+                        <li>Cloud Security</li>
+                        <li>AI Security</li>
+                    </ul>
+                </div>
+                <div class="card reveal" id="training">
+                    <div class="card-icon">🎓</div>
+                    <h3>Training & Education</h3>
+                    <p>Designed for professionals and students.</p>
+                    <ul class="feature-list">
+                        <li>Schools (NEP aligned)</li>
+                        <li>Colleges (Placement training)</li>
+                        <li>Corporate programs</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🔬</div>
+                    <h3>Research & Tools</h3>
+                    <p>Designed for defense teams.</p>
+                    <ul class="feature-list">
+                        <li>Security tools</li>
+                        <li>Threat intelligence</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3.5 LIVE THREAT DEFENSE (Animated Radar Section) -->
+    <section class="live-defense section-padding">
+        <div class="container">
+            <div class="defense-grid">
+                <!-- Left text -->
+                <div class="defense-text reveal">
+                    <div class="defense-badge">
+                        <span class="pulse-dot pulse-red"></span>
+                        Live Threat Defense
+                    </div>
+                    <h2 class="section-title">Don't Wait for the Report.<br><span class="gradient-text">Watch It Stop Attacks.</span></h2>
+                    <p>We don't just use tools; we build the defense intelligence. See exactly how our system interacts with and blocks ongoing zero-day threats in real-time.</p>
+                    <ul class="defense-features">
+                        <li>
+                            <div class="df-icon">🔒</div>
+                            <div>
+                                <strong>Active AI Detection</strong>
+                                <span>Predictive anomaly detection models that flag behaviors before signatures exist.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="df-icon">🎯</div>
+                            <div>
+                                <strong>Automated Neutralization</strong>
+                                <span>Identifies the hostile vector and automatically blackholes the incoming routing.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Threat Radar -->
+                <div class="radar-container reveal">
+                    <div class="radar-panel">
+                        <!-- Top bar -->
+                        <div class="radar-header">
+                            <div class="radar-title">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="radar-title-icon"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                <span>THREAT RADAR</span>
+                            </div>
+                            <div class="radar-dots">
+                                <span class="dot-red"></span>
+                                <span class="dot-amber"></span>
+                                <span class="dot-green"></span>
+                            </div>
+                        </div>
+                        <!-- Radar rings -->
+                        <div class="radar-body">
+                            <div class="radar-ring ring-outer"></div>
+                            <div class="radar-ring ring-mid"></div>
+                            <div class="radar-ring ring-inner spin-slow"></div>
+                            <!-- Center node -->
+                            <div class="radar-center">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                            </div>
+                            <!-- Threat indicator -->
+                            <div class="threat-node pulse-threat"></div>
+                            <div class="threat-label">
+                                <span>IP: 104.28.14.9</span>
+                                <span>ACT: BRUTEFORCE</span>
+                            </div>
+                        </div>
+                        <!-- Terminal logs -->
+                        <div class="radar-logs">
+                            <div class="radar-logs-title">TERMINAL LOGS</div>
+                            <div class="radar-log-lines" id="radar-log-lines">
+                                <!-- populated by JS -->
+                            </div>
+                            <div class="radar-logs-fade"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PRODUCTS & PLATFORMS -->
+    <section class="products section-padding bg-dark text-white" id="products">
+        <div class="container text-center">
+            <h2 class="section-title reveal">Our Products & Platforms</h2>
+            <p class="max-w mt-2 reveal">We aren't just a service company — we build the defense intelligence architecture.</p>
+            <div class="grid-3 mt-4">
+                <div class="product-card reveal">
+                    <div class="product-badge">Flagship</div>
+                    <h3>TORONS</h3>
+                    <p>Next-gen Security Operations (SOC) platform with automated threat hunting and AI-driven response orchestration.</p>
+                    <a href="https://torons.hackitiselabs.com" target="_blank" class="btn btn-secondary mt-2">Explore Platform →</a>
+                </div>
+                <div class="product-card reveal">
+                    <div class="product-badge">Identity</div>
+                    <h3>PII Analyzer</h3>
+                    <p>Detect and protect sensitive data across distributed environments. Enterprise-grade compliance auditing in seconds.</p>
+                    <a href="https://pii.hackitiselabs.com" target="_blank" class="btn btn-secondary mt-2">Protect Data →</a>
+                </div>
+                <div class="product-card reveal">
+                    <div class="product-badge badge-soon">Research</div>
+                    <h3>CII Shield</h3>
+                    <p>Critical Information Infrastructure defense system designed for government and utility scale protection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WHY HACKITISE -->
+    <section class="differentiation section-padding">
+        <div class="container text-center">
+            <h2 class="section-title reveal">Why Hackitise Labs?</h2>
+            <p class="max-w section-subtitle reveal">We bridge the gap between theory and real-world cyber warfare.</p>
+            <div class="grid-3 mt-4">
+                <div class="diff-item reveal">
+                    <div class="diff-icon">⚔️</div>
+                    <h4>Real-World Combat</h4>
+                    <p>Instructors and consultants who fight cybercrime daily, not just theorists.</p>
+                </div>
+                <div class="diff-item reveal">
+                    <div class="diff-icon">🧠</div>
+                    <h4>Deep Expertise</h4>
+                    <p>Specialization in DFIR, advanced red teaming, and cybercrime investigation.</p>
+                </div>
+                <div class="diff-item reveal">
+                    <div class="diff-icon">🔓</div>
+                    <h4>Practical & Accessible</h4>
+                    <p>Research-based, highly practical methodologies that don't break the bank.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PROOF (NUMBERS) -->
+    <section class="proof section-padding bg-light text-center">
+        <div class="container">
+            <div class="grid-3">
+                <div class="stat reveal">
+                    <span class="number counter" data-target="1.8" data-suffix="M+">0</span>
+                    <span class="label">Professionals Trained</span>
+                </div>
+                <div class="stat reveal">
+                    <span class="number counter" data-target="15.2" data-suffix="M+">0</span>
+                    <span class="label">Threats Neutralized</span>
+                </div>
+                <div class="stat reveal">
+                    <span class="number counter" data-target="4200" data-suffix="+">0</span>
+                    <span class="label">Organizations Secured</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CASE STUDIES -->
+    <section class="cases section-padding" id="cases">
+        <div class="container">
+            <h2 class="section-title text-center reveal">Real Impact</h2>
+            <div class="grid-2 mt-4">
+                <div class="case-card reveal">
+                    <div class="case-header">Financial Sector</div>
+                    <p><strong>Problem:</strong> Critical infrastructure targeted by advanced spear-phishing.</p>
+                    <p class="mt-2"><strong>Action:</strong> Deployed proprietary AI detection and trained staff on defense protocols.</p>
+                    <p class="mt-2 case-result"><strong>✅ Result:</strong> Prevented the attack, secured the org network within 48 hours.</p>
+                </div>
+                <div class="case-card reveal">
+                    <div class="case-header">E-Commerce Enterprise</div>
+                    <p><strong>Problem:</strong> Continuous data scraping and zero-day injection attempts.</p>
+                    <p class="mt-2"><strong>Action:</strong> Built and integrated our custom monitoring and detection systems.</p>
+                    <p class="mt-2 case-result"><strong>✅ Result:</strong> 99.9% malicious traffic blocked automatically with zero downtime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. TEAM & ADVISORS -->
+    <section class="team section-padding bg-light">
+        <div class="container text-center">
+            <h2 class="section-title reveal">Founders & Advisors</h2>
+            <p class="max-w mb-4 section-subtitle reveal">Cybersecurity is a trust business. Meet the experts leading the frontlines.</p>
+            <div class="grid-4 mt-4">
+                <div class="team-member reveal">
+                    <div class="avatar-placeholder"></div>
+                    <h4>Raj Aryan</h4>
+                    <p class="role">Founder & CEO</p>
+                    <p class="expertise">Cyber Warfare Specialist | Ex-Red Team Lead</p>
+                    <div class="social-mini"><a href="#">LinkedIn</a></div>
+                </div>
+                <div class="team-member reveal">
+                    <div class="avatar-placeholder"></div>
+                    <h4>Aman</h4>
+                    <p class="role">Co-Founder & CTO</p>
+                    <p class="expertise">Head of Threat Intel | Malware Analysis Pro</p>
+                    <div class="social-mini"><a href="#">LinkedIn</a></div>
+                </div>
+                <div class="team-member reveal">
+                    <div class="avatar-placeholder advisor"></div>
+                    <h4>Dr. S. K. Verma</h4>
+                    <p class="role">Senior Board Advisor</p>
+                    <p class="expertise">Defense Infrastructure Strategy Expert</p>
+                </div>
+                <div class="team-member reveal">
+                    <div class="avatar-placeholder advisor"></div>
+                    <h4>Arjun Sharma</h4>
+                    <p class="role">Strategic Policy Advisor</p>
+                    <p class="expertise">Cybersecurity Policy & Global Compliance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. BLOG -->
+    <section class="blog section-padding">
+        <div class="container">
+            <h2 class="section-title text-center reveal">Latest Intel</h2>
+            <div class="grid-3 mt-4">
+                <div class="blog-card reveal">
+                    <span class="blog-category">Malware</span>
+                    <h4 class="mt-2 text-primary">Deconstructing the New Ransomware Strains</h4>
+                    <p>A deep dive into how recent ransomware operates and how to block it at the perimeter.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                <div class="blog-card reveal">
+                    <span class="blog-category category-dfir">DFIR</span>
+                    <h4 class="mt-2 text-primary">First Response Tactics for immediate Triage</h4>
+                    <p>What to do in the first 60 minutes of recognizing a data breach.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                <div class="blog-card reveal">
+                    <span class="blog-category category-trends">Trends</span>
+                    <h4 class="mt-2 text-primary">The Dark Web in 2026: Trade Analysis</h4>
+                    <p>Insights into the current commoditization of zero-day exploits.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="faq section-padding bg-light">
+        <div class="container max-w">
+            <h2 class="section-title text-center reveal">FAQ</h2>
+            <div class="faq-list mt-4">
+                <details class="faq-item reveal">
+                    <summary>What specific consulting services do you provide?</summary>
+                    <div class="faq-content">We specialize in VAPT (Web, Mobile, API), Cloud Security architecture, and AI Security implementations.</div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary>Who are your training programs for?</summary>
+                    <div class="faq-content">We offer structured programs for Schools (NEP aligned), Colleges (placement focused), and specialized Corporate training.</div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary>Can we integrate your products into our existing stack?</summary>
+                    <div class="faq-content">Yes, platforms like TORONS and PII Analyzer are designed to seamlessly integrate with your existing security operations and data infrastructure.</div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary>How fast can you respond to a live breach?</summary>
+                    <div class="faq-content">Our incident response teams guarantee an initial response within 24 hours of contact.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. STRONG CTA -->
+    <section class="final-cta section-padding bg-dark text-white text-center" id="audit">
+        <div class="container reveal">
+            <h2>Your system may already be compromised.</h2>
+            <p class="mt-2 mb-4">Run a security audit before attackers do. Don't wait for a breach.</p>
+            <a href="#contact" class="btn btn-primary btn-large btn-glow">Get Audited Now</a>
+        </div>
+    </section>
+
+    <!-- 12. CONTACT -->
+    <section class="contact section-padding" id="contact">
+        <div class="container">
+            <div class="grid-2">
+                <div class="reveal">
+                    <h2 class="section-title">Secure Your Future</h2>
+                    <p>Reach out to our defense team. <strong>Response within 24 hrs.</strong></p>
+                    <ul class="contact-info mt-4">
+                        <li><strong>Email:</strong> secure@hackitiselabs.com</li>
+                        <li><strong>Phone:</strong> <a href="tel:+919876543210" class="text-link">+91 98765 43210</a></li>
+                        <li><strong>Location:</strong> Cyber Hub, India</li>
+                    </ul>
+                    <a href="https://wa.me/919876543210" class="btn btn-whatsapp mt-4">💬 Chat on WhatsApp</a>
+                </div>
+                <div class="reveal">
+                    <form class="contact-form" id="main-contact-form">
+                        <input type="text" name="name" placeholder="Full Name" required>
+                        <input type="email" name="email" placeholder="Work Email" required>
+                        <select name="subject" class="contact-select">
+                            <option value="Security Audit">Security Audit Request</option>
+                            <option value="VAPT Service">VAPT / Pentesting</option>
+                            <option value="Training Program">Training & Education</option>
+                            <option value="Custom Tools">Custom Tool Development</option>
+                            <option value="Other">Other Inquiry</option>
+                        </select>
+                        <textarea name="message" placeholder="Describe your security challenge..." rows="4" required></textarea>
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <span class="btn-text">Send Secure Message</span>
+                            <span class="spinner-hidden"></span>
+                        </button>
+                    </form>
+                    <div id="form-feedback" class="feedback-hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. FOOTER -->
+    <footer class="footer bg-dark text-white text-center">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-logo">Hackitise<span>Labs</span></h3>
+                    <p class="footer-desc">We bridge the gap between theory and real-world cyber warfare.</p>
+                </div>
+                <div>
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Security Consulting</a></li>
+                        <li><a href="#">Cyber Training</a></li>
+                        <li><a href="#">Platforms & Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Latest Intel</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom mt-4 border-top pt-2">
+                <p>&copy; 2026 Hackitise Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
