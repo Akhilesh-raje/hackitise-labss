@@ -1,7 +1,7 @@
 import React from 'react';
 import { ShieldAlert, Crosshair } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FadeIn } from './AnimationUtils';
+import { FadeIn } from '../ui/AnimationUtils';
 
 const FinalCTA = () => {
   return (
@@ -47,7 +47,7 @@ const FinalCTA = () => {
           <motion.a 
             whileHover={{ scale: 1.05, shadow: '0 0 50px rgba(244,63,94,0.6)' }}
             whileTap={{ scale: 0.98 }}
-            href="#contact" 
+            href="/contact" 
             className="px-12 py-5 rounded-full bg-gradient-to-r from-rose-600 to-rose-500 text-white font-black text-lg flex items-center gap-3 shadow-[0_0_30px_rgba(244,63,94,0.4)] transition-all"
           >
             Get Free Security Scan <Crosshair size={22} className="animate-pulse" />

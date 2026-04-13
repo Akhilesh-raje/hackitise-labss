@@ -42,7 +42,7 @@ const FloatingIcons = () => {
 /* ═══════════════════════════════════════════════════════════
    SECTION CTA BUTTON (reusable in every section)
    ═══════════════════════════════════════════════════════════ */
-const SectionCTA = ({ label, href = '#contact', variant = 'primary' }) => (
+const SectionCTA = ({ label, href = '/contact', variant = 'primary' }) => (
   <motion.a
     href={href}
     whileHover={{ scale: 1.04 }}
@@ -155,7 +155,7 @@ const TrainingCard = ({ icon: Icon, title, items, color, ctaLabel }) => (
 
         {ctaLabel && (
           <motion.a
-            href="#contact"
+            href="/contact"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all w-full justify-center mt-auto ${

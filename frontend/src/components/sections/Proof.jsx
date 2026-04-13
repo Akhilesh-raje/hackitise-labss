@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AnimatedCounter, FadeIn } from './AnimationUtils';
+import { AnimatedCounter, FadeIn } from '../ui/AnimationUtils';
 
 const Proof = () => {
   return (

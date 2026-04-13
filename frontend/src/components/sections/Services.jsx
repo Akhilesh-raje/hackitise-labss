@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, BookOpen, Cpu, CheckCircle2 } from 'lucide-react';
-import { FadeIn, StaggerContainer, StaggerItem, SectionHeader } from './AnimationUtils';
+import { FadeIn, StaggerContainer, StaggerItem, SectionHeader } from '../ui/AnimationUtils';
 
 const Services = () => {
   const services = [

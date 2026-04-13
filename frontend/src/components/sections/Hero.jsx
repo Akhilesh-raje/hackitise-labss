@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ShieldAlert, Activity, GitBranch, Lock, Wifi, Terminal, Shield, Cpu } from 'lucide-react';
+import { ShieldAlert, Lock, Wifi, Terminal, Shield, Fingerprint, Scan, Key, Eye, Database, Crosshair } from 'lucide-react';
 import { useRef } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 const FloatingIcon = ({ Icon, x, y, delay }) => (
   <motion.div
@@ -16,6 +17,8 @@ const FloatingIcon = ({ Icon, x, y, delay }) => (
 
 const Hero = () => {
   const ref = useRef(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
@@ -98,7 +101,7 @@ const Hero = () => {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              href="#audit"
+              href="/contact"
               className="px-6 py-3.5 md:px-8 md:py-4 rounded-full bg-gradient-to-r from-theme-primary-dark to-theme-primary text-theme-text-inverse font-bold text-base md:text-lg shadow-glow-primary flex items-center justify-center gap-2"
             >
               <ShieldAlert size={20} /> Get Security Audit
@@ -106,7 +109,7 @@ const Hero = () => {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              href="#training"
+              href="/services#training"
               className="px-6 py-3.5 md:px-8 md:py-4 rounded-full bg-theme-bg shadow-neo-out text-theme-secondary-dark font-bold text-base md:text-lg hover:shadow-neo-in transition-all text-center"
             >
               Start Learning
@@ -114,85 +117,300 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Right Animated Cyber UI */}
+        {/* Right Animated Logo Showcase */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, x: 40 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.3 }}
           className="hidden md:flex justify-center items-center relative h-full w-full py-8"
         >
-           <div className="relative w-full max-w-sm lg:max-w-md h-72 md:h-80 glass-card rounded-3xl p-6 border border-theme-primary/30 shadow-glow-primary flex flex-col justify-between overflow-hidden group">
-               {/* Radar Sweep Effect */}
-               <div className="absolute inset-0 bg-gradient-to-tr from-theme-primary/5 via-transparent to-theme-secondary-dark/5 opacity-50" />
-               <motion.div
-                 className="absolute top-0 right-0 w-32 h-32 bg-theme-primary/20 rounded-full blur-3xl"
-                 animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-                 transition={{ duration: 3, repeat: Infinity }}
-               />
+          <div className="relative flex items-center justify-center" style={{ width: '360px', height: '360px' }}>
 
-               {/* Top Bar */}
-               <div className="flex justify-between items-center relative z-10 mb-4 border-b border-theme-border/50 pb-4">
-                  <div className="text-theme-primary font-bold text-[10px] md:text-xs tracking-widest uppercase flex items-center gap-2">
-                     <motion.span
-                       className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-500"
-                       animate={{ opacity: [1, 0.3, 1] }}
-                       transition={{ duration: 1.5, repeat: Infinity }}
-                     />
-                     LIVE INTERCEPT
-                  </div>
-                  <div className="text-theme-text-muted text-[10px] md:text-xs font-mono">NODE: HX-992</div>
-               </div>
+            {/* === CONCENTRIC CIRCLE RIPPLES (theme-aware colors) === */}
+            {[0, 1, 2, 3, 4].map((i) => (
+              <motion.div
+                key={`ripple-${i}`}
+                className="absolute rounded-full"
+                style={{
+                  width: `${140 + i * 50}px`,
+                  height: `${140 + i * 50}px`,
+                  border: `${i === 0 ? '2px' : '1.5px'} solid`,
+                  borderColor: isDark
+                    ? `rgba(0, 240, 255, ${0.30 - i * 0.04})`
+                    : `rgba(0, 100, 160, ${0.35 - i * 0.05})`,
+                }}
+                animate={{
+                  scale: [1, 1.08, 1],
+                  opacity: isDark
+                    ? [0.4 - i * 0.05, 0.75 - i * 0.07, 0.4 - i * 0.05]
+                    : [0.5 - i * 0.06, 0.85 - i * 0.08, 0.5 - i * 0.06],
+                }}
+                transition={{
+                  duration: 3 + i * 0.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: i * 0.4,
+                }}
+              />
+            ))}
 
-               {/* Central Animation */}
-               <div className="flex-1 relative z-10 flex flex-col items-center justify-center scale-90 md:scale-100">
-                  <div className="relative">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-                        className="w-20 h-20 md:w-24 md:h-24 rounded-full border border-theme-secondary-dark flex items-center justify-center shadow-[0_0_20px_rgba(108,99,255,0.2)] md:shadow-[0_0_30px_rgba(108,99,255,0.3)]"
-                      >
-                          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-theme-primary" />
-                      </motion.div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                          <motion.div
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                          >
-                            <Activity size={24} className="text-theme-primary" />
-                          </motion.div>
-                      </div>
-                  </div>
-               </div>
+            {/* Expanding ripple wave (sonar ping) */}
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: '120px',
+                height: '120px',
+                border: isDark ? '2px solid rgba(0, 240, 255, 0.5)' : '2px solid rgba(0, 100, 160, 0.6)',
+              }}
+              animate={{ scale: [1, 3], opacity: [0.7, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeOut', repeatDelay: 1 }}
+            />
+            {/* Second sonar ping */}
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: '120px',
+                height: '120px',
+                border: isDark ? '1.5px solid rgba(0, 240, 255, 0.3)' : '1.5px solid rgba(0, 100, 160, 0.4)',
+              }}
+              animate={{ scale: [1, 3], opacity: [0.5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeOut', delay: 1.5, repeatDelay: 1 }}
+            />
 
-               {/* Bottom Logs - Hidden on smaller tablets if needed, or just smaller text */}
-               <div className="relative z-10 mt-4 md:mt-6 space-y-1.5 md:space-y-2 font-mono text-[9px] md:text-[10px] text-theme-text-muted">
-                   {[
-                     { prefix: 'sys', color: 'text-theme-primary', msg: 'Analyzing streams...' },
-                     { prefix: 'warn', color: 'text-amber-500', msg: 'Anomaly at 192.168.1.105' },
-                     { prefix: 'crit', color: 'text-rose-500', msg: 'Neutralizing breach...' }
-                   ].map((log, i) => (
-                     <motion.div
-                       key={i}
-                       initial={{ opacity: 0, x: -10 }}
-                       animate={{ opacity: 1, x: 0 }}
-                       transition={{ delay: 1 + i * 0.6 }}
-                       className="flex items-center gap-2"
-                     >
-                       <span className={log.color}>{log.prefix}&gt;</span> {log.msg}
-                       {i === 2 && <span className="text-theme-primary ml-1">OK</span>}
-                     </motion.div>
-                   ))}
-               </div>
-           </div>
-           
-           {/* Floating element */}
-           <motion.div
-             animate={{ y: [0, -10, 0] }}
-             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-             className="absolute -top-4 md:-top-6 -right-4 md:-right-6 w-16 h-16 md:w-20 md:h-20 glass-card rounded-2xl flex items-center justify-center shadow-neo-out text-theme-secondary-dark"
-           >
-               <GitBranch size={20} md={24} />
-           </motion.div>
+            {/* === CROSSHAIR OVERLAY === */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 360 360">
+              {/* Crosshair lines */}
+              <motion.line x1="180" y1="30" x2="180" y2="90" stroke={isDark ? 'rgba(0,240,255,0.15)' : 'rgba(0,100,160,0.2)'} strokeWidth="1" animate={{ opacity: [0.1, 0.3, 0.1] }} transition={{ duration: 3, repeat: Infinity }} />
+              <motion.line x1="180" y1="270" x2="180" y2="330" stroke={isDark ? 'rgba(0,240,255,0.15)' : 'rgba(0,100,160,0.2)'} strokeWidth="1" animate={{ opacity: [0.1, 0.3, 0.1] }} transition={{ duration: 3, repeat: Infinity }} />
+              <motion.line x1="30" y1="180" x2="90" y2="180" stroke={isDark ? 'rgba(0,240,255,0.15)' : 'rgba(0,100,160,0.2)'} strokeWidth="1" animate={{ opacity: [0.1, 0.3, 0.1] }} transition={{ duration: 3, repeat: Infinity }} />
+              <motion.line x1="270" y1="180" x2="330" y2="180" stroke={isDark ? 'rgba(0,240,255,0.15)' : 'rgba(0,100,160,0.2)'} strokeWidth="1" animate={{ opacity: [0.1, 0.3, 0.1] }} transition={{ duration: 3, repeat: Infinity }} />
+              {/* Corner brackets */}
+              <motion.path d="M60,60 L60,40 L80,40" fill="none" stroke={isDark ? 'rgba(0,240,255,0.2)' : 'rgba(0,100,160,0.25)'} strokeWidth="1.5" animate={{ opacity: [0.15, 0.4, 0.15] }} transition={{ duration: 4, repeat: Infinity, delay: 0.5 }} />
+              <motion.path d="M300,60 L300,40 L280,40" fill="none" stroke={isDark ? 'rgba(0,240,255,0.2)' : 'rgba(0,100,160,0.25)'} strokeWidth="1.5" animate={{ opacity: [0.15, 0.4, 0.15] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }} />
+              <motion.path d="M60,300 L60,320 L80,320" fill="none" stroke={isDark ? 'rgba(0,240,255,0.2)' : 'rgba(0,100,160,0.25)'} strokeWidth="1.5" animate={{ opacity: [0.15, 0.4, 0.15] }} transition={{ duration: 4, repeat: Infinity, delay: 1.5 }} />
+              <motion.path d="M300,300 L300,320 L280,320" fill="none" stroke={isDark ? 'rgba(0,240,255,0.2)' : 'rgba(0,100,160,0.25)'} strokeWidth="1.5" animate={{ opacity: [0.15, 0.4, 0.15] }} transition={{ duration: 4, repeat: Infinity, delay: 2 }} />
+            </svg>
+
+            {/* === ROTATING HEX GRID (subtle background) === */}
+            <motion.svg
+              className="absolute w-72 h-72 pointer-events-none"
+              viewBox="0 0 300 300"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+              style={{ opacity: isDark ? 0.06 : 0.08 }}
+            >
+              {/* Hexagon shapes */}
+              <polygon points="150,30 190,55 190,105 150,130 110,105 110,55" fill="none" stroke={isDark ? '#00f0ff' : '#006490'} strokeWidth="0.8" />
+              <polygon points="150,170 190,195 190,245 150,270 110,245 110,195" fill="none" stroke={isDark ? '#00f0ff' : '#006490'} strokeWidth="0.8" />
+              <polygon points="220,100 260,125 260,175 220,200 180,175 180,125" fill="none" stroke={isDark ? '#00f0ff' : '#006490'} strokeWidth="0.8" />
+              <polygon points="80,100 120,125 120,175 80,200 40,175 40,125" fill="none" stroke={isDark ? '#00f0ff' : '#006490'} strokeWidth="0.8" />
+            </motion.svg>
+
+            {/* === SCANNING SWEEP LINE === */}
+            <motion.div
+              className="absolute w-full h-px pointer-events-none z-10"
+              style={{
+                background: isDark
+                  ? 'linear-gradient(90deg, transparent, rgba(0,240,255,0.4), transparent)'
+                  : 'linear-gradient(90deg, transparent, rgba(0,100,160,0.5), transparent)',
+              }}
+              animate={{ top: ['20%', '80%', '20%'] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            {/* === CYBER SECURITY ELEMENTS floating around === */}
+
+            {/* Floating Shield icon - top right */}
+            <motion.div
+              className="absolute z-10"
+              style={{ top: '8%', right: '5%', color: isDark ? 'rgba(0,240,255,0.3)' : 'rgba(0,100,160,0.35)' }}
+              animate={{ y: [0, -10, 0], opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <Shield size={22} />
+            </motion.div>
+
+            {/* Floating Lock icon - bottom left */}
+            <motion.div
+              className="absolute z-10"
+              style={{ bottom: '12%', left: '5%', color: isDark ? 'rgba(0,240,255,0.25)' : 'rgba(0,100,160,0.3)' }}
+              animate={{ y: [0, 8, 0], opacity: [0.15, 0.4, 0.15] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            >
+              <Lock size={18} />
+            </motion.div>
+
+            {/* Floating Terminal icon - top left */}
+            <motion.div
+              className="absolute z-10"
+              style={{ top: '15%', left: '8%', color: isDark ? 'rgba(0,240,255,0.2)' : 'rgba(0,100,160,0.28)' }}
+              animate={{ y: [0, -8, 0], x: [0, 4, 0], opacity: [0.1, 0.35, 0.1] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+            >
+              <Terminal size={16} />
+            </motion.div>
+
+            {/* Floating Wifi icon - bottom right */}
+            <motion.div
+              className="absolute z-10"
+              style={{ bottom: '8%', right: '12%', color: isDark ? 'rgba(0,240,255,0.2)' : 'rgba(0,100,160,0.25)' }}
+              animate={{ y: [0, 6, 0], opacity: [0.1, 0.35, 0.1] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            >
+              <Wifi size={18} />
+            </motion.div>
+
+            {/* Floating Fingerprint - right center */}
+            <motion.div
+              className="absolute z-10"
+              style={{ top: '35%', right: '2%', color: isDark ? 'rgba(0,240,255,0.2)' : 'rgba(0,100,160,0.25)' }}
+              animate={{ y: [0, -6, 0], opacity: [0.1, 0.3, 0.1] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+            >
+              <Fingerprint size={20} />
+            </motion.div>
+
+            {/* Floating Key - left center */}
+            <motion.div
+              className="absolute z-10"
+              style={{ top: '60%', left: '2%', color: isDark ? 'rgba(0,240,255,0.2)' : 'rgba(0,100,160,0.25)' }}
+              animate={{ y: [0, 7, 0], rotate: [0, 10, 0], opacity: [0.1, 0.3, 0.1] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+            >
+              <Key size={16} />
+            </motion.div>
+
+            {/* Floating Eye - bottom center */}
+            <motion.div
+              className="absolute z-10"
+              style={{ bottom: '3%', left: '45%', color: isDark ? 'rgba(0,240,255,0.18)' : 'rgba(0,100,160,0.22)' }}
+              animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.3, 0.1] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 2.5 }}
+            >
+              <Eye size={16} />
+            </motion.div>
+
+            {/* Floating Database - top center */}
+            <motion.div
+              className="absolute z-10"
+              style={{ top: '3%', left: '55%', color: isDark ? 'rgba(0,240,255,0.18)' : 'rgba(0,100,160,0.22)' }}
+              animate={{ y: [0, -5, 0], opacity: [0.1, 0.28, 0.1] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+            >
+              <Database size={15} />
+            </motion.div>
+
+            {/* Binary text fragments */}
+            {[
+              { text: '01101001', top: '5%', left: '20%', delay: 0 },
+              { text: '10010110', top: '90%', right: '18%', delay: 1.5 },
+              { text: '11001010', top: '42%', left: '-2%', delay: 3 },
+              { text: '00110111', top: '52%', right: '-2%', delay: 2 },
+              { text: '01010011', top: '22%', right: '8%', delay: 1 },
+              { text: '10101100', bottom: '18%', left: '18%', delay: 2.5 },
+            ].map((bin, i) => (
+              <motion.span
+                key={`bin-${i}`}
+                className="absolute font-mono text-[9px] select-none z-10"
+                style={{
+                  top: bin.top, left: bin.left, right: bin.right, bottom: bin.bottom,
+                  color: isDark ? 'rgba(0,240,255,0.18)' : 'rgba(0,100,160,0.2)',
+                }}
+                animate={{ opacity: [0.05, 0.3, 0.05] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: bin.delay }}
+              >
+                {bin.text}
+              </motion.span>
+            ))}
+
+            {/* Data node dots on the rings */}
+            {[
+              { angle: 30, radius: 110, size: 4, delay: 0 },
+              { angle: 120, radius: 130, size: 3, delay: 1 },
+              { angle: 210, radius: 95, size: 5, delay: 0.5 },
+              { angle: 300, radius: 145, size: 3, delay: 2 },
+              { angle: 75, radius: 155, size: 4, delay: 1.5 },
+              { angle: 250, radius: 120, size: 3, delay: 2.5 },
+              { angle: 160, radius: 100, size: 4, delay: 0.8 },
+              { angle: 340, radius: 115, size: 3, delay: 1.8 },
+            ].map((node, i) => (
+              <motion.div
+                key={`node-${i}`}
+                className="absolute rounded-full"
+                style={{
+                  width: `${node.size}px`,
+                  height: `${node.size}px`,
+                  background: isDark ? 'rgba(0, 240, 255, 0.6)' : 'rgba(0, 100, 160, 0.55)',
+                  boxShadow: isDark ? '0 0 8px rgba(0, 240, 255, 0.5)' : '0 0 8px rgba(0, 100, 160, 0.4)',
+                  left: `calc(50% + ${Math.cos((node.angle * Math.PI) / 180) * node.radius}px - ${node.size / 2}px)`,
+                  top: `calc(50% + ${Math.sin((node.angle * Math.PI) / 180) * node.radius}px - ${node.size / 2}px)`,
+                }}
+                animate={{ scale: [1, 1.8, 1], opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: node.delay }}
+              />
+            ))}
+
+            {/* Connection lines between nodes */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: isDark ? 0.1 : 0.15 }}>
+              <motion.line x1="50%" y1="25%" x2="85%" y2="40%" stroke={isDark ? '#00f0ff' : '#006490'} strokeWidth="0.5" animate={{ opacity: [0, 0.6, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 0.5 }} />
+              <motion.line x1="15%" y1="55%" x2="35%" y2="80%" stroke={isDark ? '#00f0ff' : '#006490'} strokeWidth="0.5" animate={{ opacity: [0, 0.5, 0] }} transition={{ duration: 5, repeat: Infinity, delay: 1.5 }} />
+              <motion.line x1="65%" y1="75%" x2="85%" y2="55%" stroke={isDark ? '#00f0ff' : '#006490'} strokeWidth="0.5" animate={{ opacity: [0, 0.4, 0] }} transition={{ duration: 3.5, repeat: Infinity, delay: 2.5 }} />
+              <motion.line x1="25%" y1="25%" x2="45%" y2="15%" stroke={isDark ? '#00f0ff' : '#006490'} strokeWidth="0.5" animate={{ opacity: [0, 0.3, 0] }} transition={{ duration: 4.5, repeat: Infinity, delay: 3 }} />
+            </svg>
+
+            {/* === GLOW AURA BEHIND LOGO === */}
+            <motion.div
+              className="absolute z-15 rounded-full"
+              style={{
+                width: '140px',
+                height: '140px',
+                background: isDark
+                  ? 'radial-gradient(circle, rgba(0,240,255,0.2) 0%, rgba(0,240,255,0.08) 40%, transparent 70%)'
+                  : 'radial-gradient(circle, rgba(0,100,160,0.15) 0%, rgba(0,100,160,0.06) 40%, transparent 70%)',
+                filter: isDark ? 'blur(8px)' : 'blur(6px)',
+              }}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.7, 1, 0.7],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            {/* Secondary glow pulse */}
+            <motion.div
+              className="absolute z-15 rounded-full"
+              style={{
+                width: '200px',
+                height: '200px',
+                background: isDark
+                  ? 'radial-gradient(circle, rgba(0,240,255,0.08) 0%, transparent 60%)'
+                  : 'radial-gradient(circle, rgba(0,100,160,0.06) 0%, transparent 60%)',
+                filter: 'blur(12px)',
+              }}
+              animate={{ scale: [1.1, 1, 1.1], opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            />
+
+            {/* === STATIC LOGO (theme-aware: white for dark, black for light) === */}
+            <motion.div
+              className="relative z-20"
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5, type: 'spring', stiffness: 100, damping: 12 }}
+              style={{
+                filter: isDark
+                  ? 'drop-shadow(0 0 20px rgba(0,240,255,0.35)) drop-shadow(0 0 40px rgba(0,240,255,0.15))'
+                  : 'drop-shadow(0 0 15px rgba(0,100,160,0.2)) drop-shadow(0 0 30px rgba(0,100,160,0.08))',
+              }}
+            >
+              <img
+                src={isDark ? '/favicon.png' : '/favicon-black.png'}
+                alt="Hackitise Labs"
+                className="w-28 h-28 lg:w-36 lg:h-36 object-contain select-none"
+                draggable="false"
+              />
+            </motion.div>
+
+          </div>
         </motion.div>
 
       </motion.div>

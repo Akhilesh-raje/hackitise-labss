@@ -1,7 +1,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FadeIn, SectionHeader } from './AnimationUtils';
+import { FadeIn, SectionHeader } from '../ui/AnimationUtils';
 
 const Contact = () => {
   return (

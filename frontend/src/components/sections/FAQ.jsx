@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SectionHeader, StaggerContainer, StaggerItem } from './AnimationUtils';
+import { SectionHeader, StaggerContainer, StaggerItem } from '../ui/AnimationUtils';
 import { HelpCircle, ChevronDown } from 'lucide-react';
 
 const FAQ = () => {

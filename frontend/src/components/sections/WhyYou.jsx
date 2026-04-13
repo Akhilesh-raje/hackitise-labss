@@ -1,6 +1,6 @@
 import React from 'react';
 import { Crosshair, ShieldAlert, Zap } from 'lucide-react';
-import { StaggerContainer, StaggerItem, SectionHeader } from './AnimationUtils';
+import { StaggerContainer, StaggerItem, SectionHeader } from '../ui/AnimationUtils';
 
 const WhyYou = () => {
   const items = [

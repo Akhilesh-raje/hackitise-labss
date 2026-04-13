@@ -1,6 +1,6 @@
 import React from 'react';
 import { Building2, ShoppingCart, ArrowRight } from 'lucide-react';
-import { StaggerContainer, StaggerItem, SectionHeader } from './AnimationUtils';
+import { StaggerContainer, StaggerItem, SectionHeader } from '../ui/AnimationUtils';
 
 const CaseStudy = () => {
   const cases = [

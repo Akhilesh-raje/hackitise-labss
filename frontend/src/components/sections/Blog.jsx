@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, AlertTriangle, ShieldAlert, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { StaggerContainer, StaggerItem, SectionHeader } from './AnimationUtils';
+import { StaggerContainer, StaggerItem, SectionHeader } from '../ui/AnimationUtils';
 
 const Blog = () => {
   const posts = [
@@ -19,7 +19,7 @@ const Blog = () => {
         {posts.map((post, i) => (
           <StaggerItem key={i}>
             <motion.a 
-              href="#" 
+              href="/services" 
               whileHover={{ y: -8, scale: 1.02 }}
               className="neo-card p-6 block group border border-transparent hover:border-theme-primary/20 hover:shadow-glow-primary transition-all h-full"
             >

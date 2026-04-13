@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Target, Cpu, ShieldCheck, Activity } from 'lucide-react';
-import { FadeIn, CyberGrid } from './AnimationUtils';
+import { FadeIn, CyberGrid } from '../ui/AnimationUtils';
 
 const MainFeature = () => {
   const [logs, setLogs] = useState([

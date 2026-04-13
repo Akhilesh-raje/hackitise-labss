@@ -3,6 +3,17 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ShieldCheck, Target, Award, Users, MapPin, Globe, ArrowRight, Lock, Wifi, Zap, Terminal, Shield, Cpu, Database, Eye } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem, AnimatedCounter, CyberGrid } from '../components/ui/AnimationUtils';
 
+// Team Image Imports
+import nikunjImg from '../assets/team/nikunj-kaushik.jpeg';
+import adityaImg from '../assets/team/aditya-jha.jpg';
+import suryanshImg from '../assets/team/suryansh-deshwal.jpeg';
+import drSaryuImg from '../assets/team/dr-saryu-mishra.jpg';
+import drHnImg from '../assets/team/dr-hn-dutta.jpg';
+import drDeepakImg from '../assets/team/dr-deepak.jpg';
+import yugalImg from '../assets/team/yugal-pathak.avif';
+
+
+
 /* ──────────────── FLOATING CYBER ICONS ──────────────── */
 
 const FloatingIcons = () => {
@@ -322,28 +333,32 @@ const About = () => {
                 role: 'Business Advisor, Startup and Research Expert',
                 exp: 'Esteemed educator and researcher, former VC at DSVV and Shridhar University. Scientist at NDRI with leadership roles at NIESBUD and IEDUP. Currently an Advisor at AKTU.',
                 desc: 'Dr. Mishra brings valuable insights and mentorship to enhance our research and development initiatives.',
-                icon: Award
+                icon: Award,
+                img: drSaryuImg
               },
               {
                 name: 'Mr. Yugal Pathak',
                 role: 'Advisor, Cybersecurity & Digital Forensics Expert',
                 exp: "Expert in Digital Forensics and Incident Response (DFIR) across corporate and government sectors. Contributed to national security and led 'Make in India' forensic hardware R&D.",
                 desc: 'Seasoned trainer and speaker dedicated to securing digital borders with expertise and innovation.',
-                icon: Shield
+                icon: Shield,
+                img: yugalImg
               },
               {
                 name: 'Dr. Deepak (D3)',
                 role: 'Honorary Mentor, Cyber Forensics & Investigation',
                 exp: '15+ years in Cyber Forensics, CTI, and Cybercrime Investigation. Trained over 1.8 million professionals, including law enforcement and defense.',
                 desc: 'Dr. Deepak provides strategic mentorship in the advancement of cybersecurity research and solutions.',
-                icon: Terminal
+                icon: Terminal,
+                img: drDeepakImg
               },
               {
                 name: 'Dr. H.N. Dutta',
                 role: 'Honorary Mentor, R&D Expert',
                 exp: 'Retired Scientist-G from National Physical Laboratory. 30+ years R&D expertise in atmospheric instrumentation and Antarctic science. Pioneer in Acoustic Sounders.',
                 desc: 'Dr. Dutta provides strategic guidance in advancing cybersecurity and R&D initiatives.',
-                icon: Cpu
+                icon: Cpu,
+                img: drHnImg
               }
             ].map((mentor, idx) => (
               <StaggerItem key={idx}>
@@ -351,12 +366,23 @@ const About = () => {
                   whileHover={{ x: 4, transition: { duration: 0.2 } }}
                   className="neo-card p-8 space-y-4 border-l-4 border-l-theme-primary hover:shadow-glow-primary transition-all group relative overflow-hidden"
                 >
-                  <div className="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                    <mentor.icon size={60} />
-                  </div>
-                  <div className="space-y-1 relative z-10">
-                    <h3 className="text-xl font-bold text-theme-text-strong">{mentor.name}</h3>
-                    <div className="text-theme-primary font-bold text-xs uppercase tracking-wider">{mentor.role}</div>
+                  <div className="flex items-start justify-between relative z-10">
+                    <div className="space-y-1">
+                      <h3 className="text-xl font-bold text-theme-text-strong">{mentor.name}</h3>
+                      <div className="text-theme-primary font-bold text-xs uppercase tracking-wider">{mentor.role}</div>
+                    </div>
+                    {/* Mentor Image or Icon */}
+                    <div className="relative flex-shrink-0">
+                      {mentor.img ? (
+                        <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-theme-primary/20 shadow-neo-out group-hover:border-theme-primary/50 transition-colors">
+                          <img src={mentor.img} alt={mentor.name} className="w-full h-full object-cover" />
+                        </div>
+                      ) : (
+                        <div className="w-14 h-14 rounded-xl bg-theme-primary/10 flex items-center justify-center text-theme-primary/40 group-hover:text-theme-primary transition-colors">
+                          <mentor.icon size={28} />
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <p className="text-sm text-theme-text-muted leading-relaxed font-medium relative z-10">{mentor.exp}</p>
                   <p className="text-sm text-theme-text-strong font-bold border-t border-theme-border/50 pt-4 italic relative z-10">
@@ -382,13 +408,13 @@ const About = () => {
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
             {[
               {
                 name: 'NIKUNJ KAUSHIK',
-                role: 'Founder and Director',
+                role: 'Co-Founder and Director',
                 quote: 'Defensive dynamo — the ultimate shield against cyber chaos, making hackers think twice.',
-                img: '68',
+                img: nikunjImg,
                 type: 'Defensive Dynamo',
                 gradient: 'from-theme-primary to-theme-primary-dark'
               },
@@ -396,15 +422,23 @@ const About = () => {
                 name: 'ADITYA JHA',
                 role: 'Co-Founder and Director',
                 quote: 'Offensive Overload — wielding exploits like a magician turning vulnerabilities into victory.',
-                img: '12',
+                img: adityaImg,
                 type: 'Offensive Overload',
                 gradient: 'from-theme-secondary to-theme-secondary-dark'
+              },
+              {
+                name: 'SURYANSH DESHWAL',
+                role: 'Co-Founder and CTO',
+                quote: 'Code crusader — architecting resilient systems and turning complex challenges into secure, scalable solutions.',
+                img: suryanshImg,
+                type: 'Code Crusader',
+                gradient: 'from-theme-primary to-theme-secondary-dark'
               }
             ].map((leader, idx) => (
               <FadeIn key={idx} delay={idx * 0.2}>
                 <motion.div
                   whileHover={{ y: -8 }}
-                  className="neo-card p-10 flex flex-col items-center text-center space-y-6 group relative overflow-hidden"
+                  className="neo-card p-8 lg:p-10 flex flex-col items-center text-center space-y-6 group relative overflow-hidden"
                 >
                   {/* Background glow on hover */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${leader.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-700`} />
@@ -413,9 +447,9 @@ const About = () => {
                   <div className="relative">
                     <motion.div
                       whileHover={{ scale: 1.08, rotate: 2 }}
-                      className="w-40 h-40 rounded-full overflow-hidden border-4 border-theme-primary shadow-glow-primary z-10 relative"
+                      className="w-36 h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-theme-primary shadow-glow-primary z-10 relative"
                     >
-                      <img src={`https://i.pravatar.cc/150?img=${leader.img}`} alt={leader.name} className="w-full h-full object-cover" />
+                      <img src={leader.img} alt={leader.name} className="w-full h-full object-cover" />
                     </motion.div>
                     <motion.div
                       animate={{ rotate: 360 }}
@@ -431,16 +465,16 @@ const About = () => {
 
                   {/* Info */}
                   <div className="space-y-2 relative z-10">
-                    <h3 className="text-3xl font-black text-theme-text-strong">{leader.name}</h3>
-                    <div className="text-theme-primary font-bold text-sm uppercase tracking-widest">{leader.role}</div>
+                    <h3 className="text-2xl lg:text-3xl font-black text-theme-text-strong">{leader.name}</h3>
+                    <div className="text-theme-primary font-bold text-xs lg:text-sm uppercase tracking-widest">{leader.role}</div>
                   </div>
 
                   {/* Quote card */}
-                  <div className="relative glass-card p-6 border border-theme-primary/10 max-w-sm z-10">
-                    <div className={`absolute -top-3 left-4 px-3 py-1 bg-gradient-to-r ${leader.gradient} text-theme-text-inverse text-[10px] font-bold rounded-full uppercase tracking-tighter`}>
+                  <div className="relative glass-card p-5 lg:p-6 border border-theme-primary/10 w-full z-10 mt-auto">
+                    <div className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r ${leader.gradient} text-theme-text-inverse text-[10px] font-bold rounded-full uppercase tracking-tighter`}>
                       {leader.type}
                     </div>
-                    <p className="italic text-theme-text-muted font-medium pt-1">
+                    <p className="italic text-theme-text-muted font-medium pt-1 text-sm leading-relaxed">
                       "{leader.quote}"
                     </p>
                   </div>

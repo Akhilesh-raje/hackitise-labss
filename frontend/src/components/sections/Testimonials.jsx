@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote, UserCircle } from 'lucide-react';
-import { StaggerContainer, StaggerItem, SectionHeader } from './AnimationUtils';
+import { StaggerContainer, StaggerItem, SectionHeader } from '../ui/AnimationUtils';
 
 const Testimonials = () => {
   const testimonials = [
