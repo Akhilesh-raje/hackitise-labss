@@ -41,13 +41,21 @@ const Services = () => {
           <StaggerItem key={idx}>
             <motion.div
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="glass-card p-6 md:p-8 flex flex-col group border border-theme-border hover:border-theme-primary hover:shadow-glow-primary bg-theme-card/80 h-full transition-colors"
+              className={`glass-card p-6 md:p-8 flex flex-col group border border-theme-border transition-all bg-theme-card/80 h-full ${
+                svc.color === 'secondary' 
+                  ? 'hover:border-theme-secondary hover:shadow-glow-secondary' 
+                  : 'hover:border-theme-primary hover:shadow-glow-primary'
+              }`}
               id={svc.id}
             >
               <div className="flex items-start justify-between mb-6">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl md:rounded-3xl bg-theme-bg shadow-neo-out flex items-center justify-center text-theme-${svc.color === 'secondary' ? 'secondary-dark' : 'primary'} group-hover:bg-theme-${svc.color === 'secondary' ? 'secondary-dark' : 'primary'} group-hover:text-theme-text-inverse transition-colors delay-100`}
+                  className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl md:rounded-3xl bg-theme-bg shadow-neo-out flex items-center justify-center transition-all ${
+                    svc.color === 'secondary'
+                      ? 'text-theme-secondary group-hover:bg-theme-secondary group-hover:text-white'
+                      : 'text-theme-primary group-hover:bg-theme-primary group-hover:text-white'
+                  }`}
                 >
                   <svc.icon size={28} md={32} />
                 </motion.div>

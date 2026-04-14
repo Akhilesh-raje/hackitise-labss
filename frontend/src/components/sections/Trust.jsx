@@ -6,6 +6,7 @@ import { FadeIn } from '../ui/AnimationUtils';
 const Trust = () => {
   const items = [
     { icon: Award, label: 'ISO 27001 Certified' },
+    { icon: Award, label: 'ISO 9001B Certified' },
     { icon: Building, label: 'Govt Affiliated' },
     { icon: UserCheck, label: 'Top Security Mentors' },
   ];
@@ -16,7 +17,7 @@ const Trust = () => {
         <div className="text-center mb-6 md:mb-8">
           <p className="text-[10px] md:text-xs font-bold text-theme-text-muted uppercase tracking-widest">Recognized & Certified</p>
         </div>
-        
+
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12 lg:gap-24">
           {items.map((item, i) => (
             <motion.div

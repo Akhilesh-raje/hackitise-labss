@@ -47,11 +47,10 @@ const SectionCTA = ({ label, href = '/contact', variant = 'primary' }) => (
     href={href}
     whileHover={{ scale: 1.04 }}
     whileTap={{ scale: 0.96 }}
-    className={`inline-flex items-center gap-2.5 px-6 py-3.5 md:px-8 md:py-4 rounded-full font-bold text-xs md:text-sm transition-all w-full sm:w-max justify-center ${
-      variant === 'primary'
+    className={`inline-flex items-center gap-2.5 px-6 py-3.5 md:px-8 md:py-4 rounded-full font-bold text-xs md:text-sm transition-all w-full sm:w-max justify-center ${variant === 'primary'
         ? 'bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary hover:opacity-90'
         : 'neo-card text-theme-text-muted hover:text-theme-primary border border-theme-border hover:border-theme-primary/30'
-    }`}
+      }`}
   >
     {label} <ArrowRight size={16} />
   </motion.a>
@@ -67,17 +66,15 @@ const ServiceCard = ({ icon: Icon, title, description, color = 'primary', badge 
       className="neo-card p-6 md:p-7 space-y-4 group cursor-default h-full relative overflow-hidden"
     >
       {/* Hover glow */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${
-        color === 'primary' ? 'from-theme-primary/5' : 'from-theme-secondary/5'
-      } to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+      <div className={`absolute inset-0 bg-gradient-to-br ${color === 'primary' ? 'from-theme-primary/5' : 'from-theme-secondary/5'
+        } to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
       {/* Badge */}
       {badge && (
-        <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-          badge === 'Coming Soon'
+        <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${badge === 'Coming Soon'
             ? 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/20'
             : 'bg-theme-primary/10 text-theme-primary border border-theme-primary/20'
-        }`}>
+          }`}>
           {badge}
         </div>
       )}
@@ -85,11 +82,10 @@ const ServiceCard = ({ icon: Icon, title, description, color = 'primary', badge 
       {/* Icon */}
       <motion.div
         whileHover={{ rotate: 10 }}
-        className={`w-12 h-12 rounded-xl flex items-center justify-center relative z-10 transition-shadow ${
-          color === 'primary'
+        className={`w-12 h-12 rounded-xl flex items-center justify-center relative z-10 transition-shadow ${color === 'primary'
             ? 'bg-theme-primary/10 text-theme-primary group-hover:shadow-glow-primary'
             : 'bg-theme-secondary/10 text-theme-secondary group-hover:shadow-glow-secondary'
-        }`}
+          }`}
       >
         <Icon size={24} />
       </motion.div>
@@ -115,16 +111,14 @@ const TrainingCard = ({ icon: Icon, title, items, color, ctaLabel }) => (
   <FadeIn>
     <motion.div whileHover={{ y: -6 }} className="neo-card overflow-hidden group relative h-full flex flex-col">
       {/* Header */}
-      <div className={`px-5 py-4 md:px-7 md:py-5 border-b border-theme-border/50 bg-gradient-to-r ${
-        color === 'primary' ? 'from-theme-primary/10' :
-        color === 'secondary' ? 'from-theme-secondary/10' : 'from-yellow-500/10'
-      } to-transparent`}>
+      <div className={`px-5 py-4 md:px-7 md:py-5 border-b border-theme-border/50 bg-gradient-to-r ${color === 'primary' ? 'from-theme-primary/10' :
+          color === 'secondary' ? 'from-theme-secondary/10' : 'from-yellow-500/10'
+        } to-transparent`}>
         <div className="flex items-center gap-3 md:gap-4">
-          <div className={`w-10 h-10 md:w-11 md:h-11 rounded-lg md:rounded-xl flex items-center justify-center ${
-            color === 'primary' ? 'bg-theme-primary/15 text-theme-primary' :
-            color === 'secondary' ? 'bg-theme-secondary/15 text-theme-secondary' :
-            'bg-yellow-500/15 text-yellow-400'
-          }`}>
+          <div className={`w-10 h-10 md:w-11 md:h-11 rounded-lg md:rounded-xl flex items-center justify-center ${color === 'primary' ? 'bg-theme-primary/15 text-theme-primary' :
+              color === 'secondary' ? 'bg-theme-secondary/15 text-theme-secondary' :
+                'bg-yellow-500/15 text-yellow-400'
+            }`}>
             <Icon size={20} md={22} />
           </div>
           <h3 className="text-lg md:text-xl font-black text-theme-text-strong">{title}</h3>
@@ -137,11 +131,10 @@ const TrainingCard = ({ icon: Icon, title, items, color, ctaLabel }) => (
           {items.map((item, idx) => (
             <motion.li key={idx} whileHover={{ x: 4 }} className="group/item cursor-default">
               <div className="flex items-start gap-3">
-                <span className={`w-5 h-5 md:w-6 md:h-6 rounded md:rounded-lg flex items-center justify-center flex-shrink-0 text-[10px] md:text-xs font-bold mt-0.5 ${
-                  color === 'primary' ? 'bg-theme-primary/10 text-theme-primary' :
-                  color === 'secondary' ? 'bg-theme-secondary/10 text-theme-secondary' :
-                  'bg-yellow-500/10 text-yellow-400'
-                }`}>
+                <span className={`w-5 h-5 md:w-6 md:h-6 rounded md:rounded-lg flex items-center justify-center flex-shrink-0 text-[10px] md:text-xs font-bold mt-0.5 ${color === 'primary' ? 'bg-theme-primary/10 text-theme-primary' :
+                    color === 'secondary' ? 'bg-theme-secondary/10 text-theme-secondary' :
+                      'bg-yellow-500/10 text-yellow-400'
+                  }`}>
                   {idx + 1}
                 </span>
                 <div>
@@ -158,11 +151,10 @@ const TrainingCard = ({ icon: Icon, title, items, color, ctaLabel }) => (
             href="/contact"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all w-full justify-center mt-auto ${
-              color === 'primary' ? 'bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary' :
-              color === 'secondary' ? 'bg-gradient-to-r from-theme-secondary to-theme-secondary-dark text-theme-text-inverse shadow-glow-secondary' :
-              'bg-gradient-to-r from-yellow-500 to-yellow-600 text-black'
-            }`}
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all w-full justify-center mt-auto ${color === 'primary' ? 'bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary' :
+                color === 'secondary' ? 'bg-gradient-to-r from-theme-secondary to-theme-secondary-dark text-theme-text-inverse shadow-glow-secondary' :
+                  'bg-gradient-to-r from-yellow-500 to-yellow-600 text-black'
+              }`}
           >
             {ctaLabel} <ArrowRight size={14} />
           </motion.a>
@@ -182,11 +174,10 @@ const ProductCard = ({ name, description, icon: Icon, color, badge }) => (
       className="neo-card p-6 md:p-8 space-y-4 md:space-y-5 group cursor-default relative overflow-hidden h-full"
     >
       {/* Top accent */}
-      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${
-        color === 'primary' ? 'from-theme-primary to-theme-primary-dark' :
-        color === 'secondary' ? 'from-theme-secondary to-theme-secondary-dark' :
-        'from-yellow-400 to-orange-500'
-      }`} />
+      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${color === 'primary' ? 'from-theme-primary to-theme-primary-dark' :
+          color === 'secondary' ? 'from-theme-secondary to-theme-secondary-dark' :
+            'from-yellow-400 to-orange-500'
+        }`} />
 
       {badge && (
         <div className="absolute top-4 right-4 md:top-6 md:right-6 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-yellow-500/15 text-yellow-400 border border-yellow-500/20">
@@ -196,11 +187,10 @@ const ProductCard = ({ name, description, icon: Icon, color, badge }) => (
 
       <motion.div
         whileHover={{ rotate: 12 }}
-        className={`w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center ${
-          color === 'primary' ? 'bg-gradient-to-br from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary' :
-          color === 'secondary' ? 'bg-gradient-to-br from-theme-secondary to-theme-secondary-dark text-theme-text-inverse shadow-glow-secondary' :
-          'bg-gradient-to-br from-yellow-400 to-orange-500 text-black'
-        }`}
+        className={`w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center ${color === 'primary' ? 'bg-gradient-to-br from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary' :
+            color === 'secondary' ? 'bg-gradient-to-br from-theme-secondary to-theme-secondary-dark text-theme-text-inverse shadow-glow-secondary' :
+              'bg-gradient-to-br from-yellow-400 to-orange-500 text-black'
+          }`}
       >
         <Icon size={24} md={28} />
       </motion.div>
@@ -571,7 +561,7 @@ const Services = () => {
               color="secondary"
             />
             <ProductCard
-              name="CII Platform"
+              name="CTI Platform"
               description="Next-generation platform for critical infrastructure protection. Continuous monitoring and regulatory compliance."
               icon={Database}
               color="accent"

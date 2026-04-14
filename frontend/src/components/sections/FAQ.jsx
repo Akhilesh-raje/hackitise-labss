@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionHeader, StaggerContainer, StaggerItem } from '../ui/AnimationUtils';
 import { HelpCircle, ChevronDown } from 'lucide-react';
+import { useApiData } from '../../hooks/useApiData';
+
+const fallbackFaqs = [
+  { question: 'What exact services do you provide?', answer: 'We provide VAPT, incident response, advanced cyber training, and build custom security tools.' },
+  { question: 'Who is this for?', answer: 'Enterprises needing hardened security, and professionals wanting practical cyber combat skills.' },
+  { question: 'What makes you different?', answer: 'We are active practitioners in the field. Every training and consulting engagement is based on recent real-world data.' },
+  { question: 'How do I contact you?', answer: 'Email us directly at info@hackitiselabs.in or call +91 9354903995.' },
+];
 
 const FAQ = () => {
-  const faqs = [
-    { q: 'What exact services do you provide?', a: 'We provide VAPT, incident response, advanced cyber training, and build custom security tools.' },
-    { q: 'Who is this for?', a: 'Enterprises needing hardened security, and professionals wanting practical cyber combat skills.' },
-    { q: 'What makes you different?', a: 'We are active practitioners in the field. Every training and consulting engagement is based on recent real-world data.' },
-    { q: 'How do I contact you?', a: 'Fill out the form below or email us directly at secure@hackitiselabs.com.' },
-  ];
+  const { data: faqs } = useApiData('/faqs', fallbackFaqs);
 
   const [activeIndex, setActiveIndex] = useState(null);
 
@@ -31,7 +34,7 @@ const FAQ = () => {
                             <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${activeIndex === i ? 'bg-theme-primary text-theme-text-inverse' : 'bg-theme-primary/10 text-theme-primary'}`}>
                                 Q
                             </span>
-                            {faq.q}
+                            {faq.question || faq.q}
                         </h4>
                         <motion.div
                           animate={{ rotate: activeIndex === i ? 180 : 0 }}
@@ -49,7 +52,7 @@ const FAQ = () => {
                               transition={{ duration: 0.3 }}
                             >
                                 <p className="px-6 pb-6 text-theme-text-muted ml-12 leading-relaxed border-t border-theme-border/5 pt-4">
-                                    {faq.a}
+                                    {faq.answer || faq.a}
                                 </p>
                             </motion.div>
                         )}

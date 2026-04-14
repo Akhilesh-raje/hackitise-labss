@@ -11,8 +11,7 @@ const Team = () => {
     {
       name: 'NIKUNJ KAUSHIK',
       role: 'Co-Founder and Director',
-      quote: 'Defensive dynamo — the ultimate shield against cyber chaos, making hackers think twice.',
-      type: 'Defensive Dynamo',
+      quote: 'The ultimate shield against cyber chaos, making hackers think twice.',
       img: nikunjImg,
       color: 'text-theme-primary',
       bg: 'bg-theme-primary/10',
@@ -22,19 +21,17 @@ const Team = () => {
     {
       name: 'ADITYA JHA',
       role: 'Co-Founder and Director',
-      quote: 'Offensive Overload — wielding exploits like a magician turning vulnerabilities into victory.',
-      type: 'Offensive Overload',
+      quote: 'Wielding exploits like a magician turning vulnerabilities into victory.',
       img: adityaImg,
-      color: 'text-theme-secondary-dark',
-      bg: 'bg-theme-secondary/10',
-      border: 'border-theme-secondary/30',
+      color: 'text-theme-primary',
+      bg: 'bg-theme-primary/10',
+      border: 'border-theme-primary/30',
       icon: Zap
     },
     {
       name: 'SURYANSH DESHWAL',
       role: 'Co-Founder and CTO',
-      quote: 'Code crusader — architecting resilient systems and turning complex challenges into secure, scalable solutions.',
-      type: 'Code Crusader',
+      quote: 'Architecting resilient systems and turning complex challenges into secure, scalable solutions.',
       img: suryanshImg,
       color: 'text-theme-primary',
       bg: 'bg-theme-primary/10',
@@ -85,10 +82,7 @@ const Team = () => {
 
               {/* Quote card */}
               <div className="relative glass-card p-5 lg:p-6 border border-theme-primary/10 w-full z-10 mt-auto">
-                <div className={`absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse text-[10px] font-black rounded-full uppercase tracking-tighter shadow-glow-primary`}>
-                  {m.type}
-                </div>
-                <p className="italic text-theme-text-muted font-medium pt-2 text-sm leading-relaxed">
+                <p className="italic text-theme-text-muted font-medium text-sm leading-relaxed text-center">
                   "{m.quote}"
                 </p>
               </div>

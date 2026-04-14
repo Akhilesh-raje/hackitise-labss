@@ -2,21 +2,28 @@ import React from 'react';
 import { BookOpen, AlertTriangle, ShieldAlert, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { StaggerContainer, StaggerItem, SectionHeader } from '../ui/AnimationUtils';
+import { useApiData } from '../../hooks/useApiData';
+
+const iconMap = { AlertTriangle, BookOpen, ShieldAlert, Cpu };
+
+const fallbackPosts = [
+  { title: 'Malware Analysis', description: 'Deconstructing the latest ransomware strains.', icon: 'AlertTriangle', color: 'theme-primary' },
+  { title: 'Cybercrime Trends', description: 'What the dark web is trading today.', icon: 'BookOpen', color: 'theme-secondary-dark' },
+  { title: 'DFIR Tactics', description: 'First response steps for immediate triage.', icon: 'ShieldAlert', color: 'theme-primary' },
+  { title: 'Security Architecture', description: 'Building resilient enterprise networks.', icon: 'Cpu', color: 'theme-primary-dark' },
+];
 
 const Blog = () => {
-  const posts = [
-    { title: 'Malware Analysis', desc: 'Deconstructing the latest ransomware strains.', icon: AlertTriangle, color: 'theme-primary' },
-    { title: 'Cybercrime Trends', desc: 'What the dark web is trading today.', icon: BookOpen, color: 'theme-secondary-dark' },
-    { title: 'DFIR Tactics', desc: 'First response steps for immediate triage.', icon: ShieldAlert, color: 'theme-primary' },
-    { title: 'Security Architecture', desc: 'Building resilient enterprise networks.', icon: Cpu, color: 'theme-primary-dark' },
-  ];
+  const { data: posts } = useApiData('/blog', fallbackPosts);
 
   return (
     <section className="mt-20">
       <SectionHeader title="Latest Intel" badge="Knowledge Base" icon={BookOpen} />
       
       <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {posts.map((post, i) => (
+        {posts.map((post, i) => {
+          const PostIcon = iconMap[post.icon] || BookOpen;
+          return (
           <StaggerItem key={i}>
             <motion.a 
               href="/services" 
@@ -24,13 +31,14 @@ const Blog = () => {
               className="neo-card p-6 block group border border-transparent hover:border-theme-primary/20 hover:shadow-glow-primary transition-all h-full"
             >
               <div className={`flex items-center gap-3 mb-4 text-${post.color}`}>
-                <post.icon size={20} className="group-hover:rotate-12 transition-transform" />
+                <PostIcon size={20} className="group-hover:rotate-12 transition-transform" />
               </div>
               <h4 className="text-lg font-bold text-theme-text-strong mb-2 group-hover:text-theme-primary transition-colors">{post.title}</h4>
-              <p className="text-theme-text-muted text-sm leading-relaxed">{post.desc}</p>
+              <p className="text-theme-text-muted text-sm leading-relaxed">{post.description || post.desc}</p>
             </motion.a>
           </StaggerItem>
-        ))}
+          );
+        })}
       </StaggerContainer>
     </section>
   );

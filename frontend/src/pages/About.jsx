@@ -59,7 +59,7 @@ const TerminalBlock = () => {
     '> iso_certification: VERIFIED ✓',
     '> defense_level: MAXIMUM',
   ];
-  
+
   return (
     <div className="neo-card rounded-2xl overflow-hidden border border-theme-primary/20">
       {/* Terminal header */}
@@ -158,11 +158,10 @@ const About = () => {
 
       {/* ═══ ANIMATED STATS BAR ═══ */}
       <section className="px-4 py-12 md:py-16 border-y border-theme-border/30 bg-theme-bg/50">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
           <AnimatedCounter target={100} suffix="+" label="Sessions Delivered" />
-          <AnimatedCounter target={50} suffix="+" label="Clients Secured" />
-          <AnimatedCounter target={4} suffix="" label="Expert Advisors" />
-          <AnimatedCounter target={1800000} suffix="" label="Professionals Trained" />
+          <AnimatedCounter target={10} suffix="+" label="Clients Secured" />
+          <AnimatedCounter target={10000} suffix="" label="Professionals Trained" />
         </div>
       </section>
 
@@ -361,7 +360,7 @@ const About = () => {
                 icon: Terminal,
                 img: drDeepakImg
               },
-             
+
             ].map((mentor, idx) => (
               <StaggerItem key={idx}>
                 <motion.div
@@ -415,32 +414,29 @@ const About = () => {
               {
                 name: 'NIKUNJ KAUSHIK',
                 role: 'Co-Founder and Director',
-                quote: 'Defensive dynamo — the ultimate shield against cyber chaos, making hackers think twice.',
+                quote: 'The ultimate shield against cyber chaos, making hackers think twice.',
                 img: nikunjImg,
-                type: 'Defensive Dynamo',
                 gradient: 'from-theme-primary to-theme-primary-dark'
               },
               {
                 name: 'ADITYA JHA',
                 role: 'Co-Founder and Director',
-                quote: 'Offensive Overload — wielding exploits like a magician turning vulnerabilities into victory.',
+                quote: 'Wielding exploits like a magician turning vulnerabilities into victory.',
                 img: adityaImg,
-                type: 'Offensive Overload',
                 gradient: 'from-theme-secondary to-theme-secondary-dark'
               },
               {
                 name: 'SURYANSH DESHWAL',
                 role: 'Co-Founder and CTO',
-                quote: 'Code crusader — architecting resilient systems and turning complex challenges into secure, scalable solutions.',
+                quote: 'Architecting resilient systems and turning complex challenges into secure, scalable solutions.',
                 img: suryanshImg,
-                type: 'Code Crusader',
                 gradient: 'from-theme-primary to-theme-secondary-dark'
               }
             ].map((leader, idx) => (
               <FadeIn key={idx} delay={idx * 0.2}>
                 <motion.div
                   whileHover={{ y: -8 }}
-                  className="neo-card p-8 lg:p-10 flex flex-col items-center text-center space-y-6 group relative overflow-hidden"
+                  className="neo-card p-6 md:p-8 lg:p-10 flex flex-col items-center text-center space-y-6 group relative overflow-hidden h-full"
                 >
                   {/* Background glow on hover */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${leader.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-700`} />
@@ -449,7 +445,7 @@ const About = () => {
                   <div className="relative">
                     <motion.div
                       whileHover={{ scale: 1.08, rotate: 2 }}
-                      className="w-36 h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-theme-primary shadow-glow-primary z-10 relative"
+                      className="w-28 h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-theme-primary shadow-glow-primary z-10 relative"
                     >
                       <img src={leader.img} alt={leader.name} className="w-full h-full object-cover" />
                     </motion.div>
@@ -467,16 +463,13 @@ const About = () => {
 
                   {/* Info */}
                   <div className="space-y-2 relative z-10">
-                    <h3 className="text-2xl lg:text-3xl font-black text-theme-text-strong">{leader.name}</h3>
-                    <div className="text-theme-primary font-bold text-xs lg:text-sm uppercase tracking-widest">{leader.role}</div>
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-theme-text-strong leading-tight min-h-[3.5rem] md:min-h-[4rem] flex items-center justify-center">{leader.name}</h3>
+                    <div className="text-theme-primary font-bold text-[10px] md:text-xs lg:text-sm uppercase tracking-widest">{leader.role}</div>
                   </div>
 
                   {/* Quote card */}
-                  <div className="relative glass-card p-5 lg:p-6 border border-theme-primary/10 w-full z-10 mt-auto">
-                    <div className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r ${leader.gradient} text-theme-text-inverse text-[10px] font-bold rounded-full uppercase tracking-tighter`}>
-                      {leader.type}
-                    </div>
-                    <p className="italic text-theme-text-muted font-medium pt-1 text-sm leading-relaxed">
+                  <div className="relative glass-card p-5 border border-theme-primary/10 w-full z-10 mt-auto">
+                    <p className="italic text-theme-text-muted font-medium text-xs md:text-sm leading-relaxed text-center">
                       "{leader.quote}"
                     </p>
                   </div>

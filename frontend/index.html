@@ -19,6 +19,19 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:image" content="/android-chrome-512x512.png" />
     <title>Hackitise Labs | Cybersecurity Services &amp; Solutions</title>
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('nexus-theme');
+          var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var activeTheme = theme;
+          if (!theme || theme === 'system') {
+              activeTheme = supportDarkMode ? 'dark' : 'light';
+          }
+          document.documentElement.classList.add(activeTheme);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

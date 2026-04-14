@@ -2,31 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote, UserCircle } from 'lucide-react';
 import { StaggerContainer, StaggerItem, SectionHeader } from '../ui/AnimationUtils';
+import { useApiData } from '../../hooks/useApiData';
+
+const fallbackTestimonials = [
+  { name: 'Sarah Thompson', role: 'CISO, FinTech Solutions', text: "Hackitise Labs transformed our security posture. Their VAPT revealed vulnerabilities we didn't even know existed. Their response time is unmatched.", rating: 5, color: 'theme-primary' },
+  { name: 'David Chen', role: 'Tech Lead, Global Commerce', text: "The AI-powered threat detection they built for us has automated 90% of our monitoring. It's like having a 24/7 elite defense team in the cloud.", rating: 5, color: 'theme-secondary-dark' },
+  { name: 'Emily Rodriguez', role: 'Engineering Director', text: 'Their advanced training workshops are exactly what our team needed. Practical, hands-on, and based on real-world cyber battle scenarios.', rating: 5, color: 'theme-primary-dark' },
+];
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      name: 'Sarah Thompson',
-      role: 'CISO, FinTech Solutions',
-      text: 'Hackitise Labs transformed our security posture. Their VAPT revealed vulnerabilities we didn\'t even know existed. Their response time is unmatched.',
-      rating: 5,
-      color: 'theme-primary'
-    },
-    {
-      name: 'David Chen',
-      role: 'Tech Lead, Global Commerce',
-      text: 'The AI-powered threat detection they built for us has automated 90% of our monitoring. It\'s like having a 24/7 elite defense team in the cloud.',
-      rating: 5,
-      color: 'theme-secondary-dark'
-    },
-    {
-      name: 'Emily Rodriguez',
-      role: 'Engineering Director',
-      text: 'Their advanced training workshops are exactly what our team needed. Practical, hands-on, and based on real-world cyber battle scenarios.',
-      rating: 5,
-      color: 'theme-primary-dark'
-    }
-  ];
+  const { data: testimonials } = useApiData('/testimonials', fallbackTestimonials);
 
   return (
     <section className="mt-20 px-4">

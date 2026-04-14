@@ -43,3 +43,5 @@ yarn-error.log*
 .npm/
 tmp/
 temp/
+pnpm-lock.yaml
+dummy_resume*

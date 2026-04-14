@@ -45,44 +45,22 @@ const Hero = () => {
         transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
       />
 
-      <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
-        
+      <motion.div style={{ opacity: heroOpacity }} className="relative z-10 w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
+
         {/* Left Content */}
         <div className="space-y-5 md:space-y-6">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-theme-primary/10 text-theme-primary-dark font-bold text-xs md:text-sm shadow-neo-in w-max"
-          >
-             <motion.span
-               className="w-2 h-2 rounded-full bg-theme-primary"
-               animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-               transition={{ duration: 2, repeat: Infinity }}
-             />
-             Hackitise Labs – Cyber Intelligence
-          </motion.div>
+
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-theme-text-strong leading-[1.1] md:leading-tight tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-theme-text-strong leading-none tracking-tighter"
           >
-            We Don't Just Detect Threats &mdash;<br className="hidden sm:block" />
-            <span className="relative inline-block mt-2">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-theme-primary to-theme-secondary-dark font-extrabold uppercase">
-                We Neutralize Them.
-              </span>
-              <motion.span
-                className="absolute -bottom-1 md:-bottom-2 left-0 h-1 bg-gradient-to-r from-theme-primary to-theme-secondary rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: '100%' }}
-                transition={{ duration: 1.2, delay: 0.8 }}
-              />
-            </span>
+            Hackitise Labs
+
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,7 +69,7 @@ const Hero = () => {
           >
             Advanced cybersecurity training, consulting, and AI-powered threat intelligence.
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

@@ -8,6 +8,9 @@ import {
   Fingerprint, FileSearch, Wrench, BookOpen, ChevronRight
 } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem, CyberGrid, AnimatedCounter } from '../components/ui/AnimationUtils';
+import { useApiData } from '../hooks/useApiData';
+import { api } from '../utils/api';
+
 
 /* ═══════════════════════════════════════════════════════════
    FLOATING CYBER ICONS (background decoration)
@@ -47,11 +50,10 @@ const SectionCTA = ({ label, href = '#apply', variant = 'primary', onClick }) =>
     onClick={onClick}
     whileHover={{ scale: 1.04 }}
     whileTap={{ scale: 0.96 }}
-    className={`inline-flex items-center gap-2.5 px-6 py-3.5 md:px-8 md:py-4 rounded-full font-bold text-xs md:text-sm transition-all w-full sm:w-max justify-center ${
-      variant === 'primary'
+    className={`inline-flex items-center gap-2.5 px-6 py-3.5 md:px-8 md:py-4 rounded-full font-bold text-xs md:text-sm transition-all w-full sm:w-max justify-center ${variant === 'primary'
         ? 'bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary hover:opacity-90'
         : 'neo-card text-theme-text-muted hover:text-theme-primary border border-theme-border hover:border-theme-primary/30'
-    }`}
+      }`}
   >
     {label} <ArrowRight size={16} />
   </motion.a>
@@ -66,17 +68,15 @@ const WhyCard = ({ icon: Icon, title, description, color = 'primary' }) => (
       whileHover={{ y: -6, scale: 1.01 }}
       className="neo-card p-6 md:p-7 space-y-4 group cursor-default h-full relative overflow-hidden"
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${
-        color === 'primary' ? 'from-theme-primary/5' : 'from-theme-secondary/5'
-      } to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+      <div className={`absolute inset-0 bg-gradient-to-br ${color === 'primary' ? 'from-theme-primary/5' : 'from-theme-secondary/5'
+        } to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
       <motion.div
         whileHover={{ rotate: 10 }}
-        className={`w-12 h-12 rounded-xl flex items-center justify-center relative z-10 transition-shadow ${
-          color === 'primary'
+        className={`w-12 h-12 rounded-xl flex items-center justify-center relative z-10 transition-shadow ${color === 'primary'
             ? 'bg-theme-primary/10 text-theme-primary group-hover:shadow-glow-primary'
             : 'bg-theme-secondary/10 text-theme-secondary group-hover:shadow-glow-secondary'
-        }`}
+          }`}
       >
         <Icon size={24} />
       </motion.div>
@@ -101,11 +101,10 @@ const RoleCard = ({ title, location, type, skills, color = 'primary' }) => (
       className="neo-card overflow-hidden group cursor-default relative h-full flex flex-col"
     >
       {/* Top accent */}
-      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${
-        color === 'primary' ? 'from-theme-primary to-theme-primary-dark' :
-        color === 'secondary' ? 'from-theme-secondary to-theme-secondary-dark' :
-        'from-yellow-400 to-orange-500'
-      }`} />
+      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${color === 'primary' ? 'from-theme-primary to-theme-primary-dark' :
+          color === 'secondary' ? 'from-theme-secondary to-theme-secondary-dark' :
+            'from-yellow-400 to-orange-500'
+        }`} />
 
       <div className="p-6 md:p-8 flex-1 flex flex-col space-y-5">
         {/* Role Header */}
@@ -145,11 +144,10 @@ const RoleCard = ({ title, location, type, skills, color = 'primary' }) => (
           href="#apply"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all w-full justify-center mt-auto ${
-            color === 'primary' ? 'bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary' :
-            color === 'secondary' ? 'bg-gradient-to-r from-theme-secondary to-theme-secondary-dark text-theme-text-inverse shadow-glow-secondary' :
-            'bg-gradient-to-r from-yellow-500 to-yellow-600 text-black'
-          }`}
+          className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all w-full justify-center mt-auto ${color === 'primary' ? 'bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary' :
+              color === 'secondary' ? 'bg-gradient-to-r from-theme-secondary to-theme-secondary-dark text-theme-text-inverse shadow-glow-secondary' :
+                'bg-gradient-to-r from-yellow-500 to-yellow-600 text-black'
+            }`}
         >
           Apply Now <ArrowRight size={14} />
         </motion.a>
@@ -167,22 +165,50 @@ const RoleCard = ({ title, location, type, skills, color = 'primary' }) => (
    APPLICATION FORM
    ═══════════════════════════════════════════════════════════ */
 const ApplicationForm = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', role: '' });
+  const [resume, setResume] = useState(null);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    setResume(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
-    setTimeout(() => {
+    setErrorMsg('');
+
+    try {
+      const data = new FormData();
+      data.append('name', formData.name);
+      data.append('email', formData.email);
+      data.append('message', formData.message);
+      data.append('role', formData.role);
+      if (resume) {
+        data.append('resume', resume);
+      }
+
+      await api.postForm('/applications', data);
+      
       setStatus('sent');
-      setTimeout(() => setStatus('idle'), 3000);
-      setFormData({ name: '', email: '', message: '' });
-    }, 1500);
+      setTimeout(() => setStatus('idle'), 5000);
+      setFormData({ name: '', email: '', message: '', role: '' });
+      setResume(null);
+      // Reset file input if possible
+      e.target.reset();
+    } catch (err) {
+      console.error('Submission error:', err);
+      setStatus('error');
+      setErrorMsg(err.message || 'Failed to submit application. Please try again or email us directly.');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -225,9 +251,12 @@ const ApplicationForm = () => {
         <input
           id="career-resume"
           type="file"
+          name="resume"
           accept=".pdf,.doc,.docx"
+          onChange={handleFileChange}
           className="w-full px-4 py-3 rounded-xl bg-theme-bg border border-theme-border text-theme-text text-sm font-medium file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-theme-primary/10 file:text-theme-primary hover:file:bg-theme-primary/20 transition-all cursor-pointer"
         />
+
       </div>
 
       <div className="space-y-1.5">
@@ -250,24 +279,53 @@ const ApplicationForm = () => {
         disabled={status === 'sending'}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className={`inline-flex items-center gap-2.5 px-6 py-3 md:px-8 md:py-3.5 rounded-full font-bold text-xs md:text-sm transition-all w-full sm:w-max justify-center ${
-          status === 'sent'
+        className={`inline-flex items-center gap-2.5 px-6 py-3 md:px-8 md:py-3.5 rounded-full font-bold text-xs md:text-sm transition-all w-full sm:w-max justify-center ${status === 'sent'
             ? 'bg-gradient-to-r from-theme-secondary to-theme-secondary-dark text-theme-text-inverse shadow-glow-secondary'
             : 'bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse shadow-glow-primary hover:opacity-90'
-        } disabled:opacity-70`}
+          } disabled:opacity-70`}
       >
         {status === 'idle' && (<>Submit Application <Send size={16} /></>)}
         {status === 'sending' && (<><Loader2 size={16} className="animate-spin" /> Sending...</>)}
         {status === 'sent' && (<><CheckCircle size={16} /> Sent Successfully!</>)}
       </motion.button>
+
+      {status === 'error' && (
+        <p className="text-xs font-bold text-red-500 mt-2">{errorMsg}</p>
+      )}
     </form>
   );
 };
+
+const fallbackJobs = [
+  {
+    title: 'Cybersecurity Analyst Intern',
+    location: 'Remote / Hybrid',
+    type: 'Internship',
+    skills: ['Networking', 'Basic Security', 'Linux', 'Wireshark'],
+    color: 'primary',
+  },
+  {
+    title: 'Security Researcher',
+    location: 'Remote',
+    type: 'Full-time / Part-time',
+    skills: ['Malware Analysis', 'Scripting', 'OSINT', 'Threat Intel'],
+    color: 'secondary',
+  },
+  {
+    title: 'Full Stack Developer (Security Tools)',
+    location: 'Remote / On-site',
+    type: 'Full-time',
+    skills: ['React', 'Node.js', 'APIs', 'Python', 'Docker'],
+    color: 'accent',
+  },
+];
+
 
 /* ═══════════════════════════════════════════════════════════════════
    ██  MAIN CAREERS PAGE
    ═══════════════════════════════════════════════════════════════════ */
 const Careers = () => {
+  const { data: jobs } = useApiData('/jobs', fallbackJobs);
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
@@ -469,28 +527,18 @@ const Careers = () => {
           </FadeIn>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <RoleCard
-              title="Cybersecurity Analyst Intern"
-              location="Remote / Hybrid"
-              type="Internship"
-              skills={['Networking', 'Basic Security', 'Linux', 'Wireshark']}
-              color="primary"
-            />
-            <RoleCard
-              title="Security Researcher"
-              location="Remote"
-              type="Full-time / Part-time"
-              skills={['Malware Analysis', 'Scripting', 'OSINT', 'Threat Intel']}
-              color="secondary"
-            />
-            <RoleCard
-              title="Full Stack Developer (Cyber Tools)"
-              location="Remote / On-site"
-              type="Full-time"
-              skills={['React', 'Node.js', 'APIs', 'Python', 'Docker']}
-              color="accent"
-            />
+            {jobs.map((job, idx) => (
+              <RoleCard
+                key={idx}
+                title={job.title}
+                location={job.location}
+                type={job.type}
+                skills={job.skills}
+                color={job.color}
+              />
+            ))}
           </div>
+
 
           <FadeIn delay={0.2}>
             <div className="text-center pt-4">
@@ -620,43 +668,6 @@ const Careers = () => {
       </section>
 
       {/* ══════════════════════════════════════════
-           7. IMPACT STATS
-         ══════════════════════════════════════════ */}
-      <section className="bg-theme-bg/30 py-20 border-y border-theme-border/50 relative overflow-hidden">
-        <CyberGrid />
-        <div className="max-w-5xl mx-auto px-4">
-          <FadeIn>
-            <div className="text-center space-y-4 mb-14">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-theme-secondary/10 text-theme-secondary text-xs font-bold uppercase tracking-widest border border-theme-secondary/20">
-                <Zap size={12} /> Our Reach
-              </div>
-              <h2 className="text-4xl font-black text-theme-text-strong">
-                Impact at Scale
-              </h2>
-            </div>
-          </FadeIn>
-
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            <StaggerItem>
-              <motion.div whileHover={{ y: -4 }} className="neo-card p-8 text-center">
-                <AnimatedCounter target={1800000} suffix="+" label="Professionals Trained" />
-              </motion.div>
-            </StaggerItem>
-            <StaggerItem>
-              <motion.div whileHover={{ y: -4 }} className="neo-card p-8 text-center">
-                <AnimatedCounter target={50} suffix="+" label="Security Projects" />
-              </motion.div>
-            </StaggerItem>
-            <StaggerItem>
-              <motion.div whileHover={{ y: -4 }} className="neo-card p-8 text-center">
-                <AnimatedCounter target={200} suffix="+" label="Cyber Incidents Analyzed" />
-              </motion.div>
-            </StaggerItem>
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
            8. APPLY / REACH OUT
          ══════════════════════════════════════════ */}
       <section id="apply" className="px-4 py-24 relative">
@@ -676,50 +687,37 @@ const Careers = () => {
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-            {/* Left – Form */}
-            <FadeIn direction="left">
-              <motion.div whileHover={{ y: -4 }} className="neo-card p-6 md:p-8 lg:p-10 h-full">
-                <div className="space-y-2 mb-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-theme-primary/10 text-theme-primary text-xs font-bold uppercase tracking-widest">
-                    <Send size={12} /> Application
-                  </div>
-                  <h3 className="text-2xl font-black text-theme-text-strong">Send your application</h3>
-                </div>
-                <ApplicationForm />
-              </motion.div>
-            </FadeIn>
-
-            {/* Right – Email + Info */}
-            <FadeIn direction="right" delay={0.15}>
-              <div className="space-y-6 h-full flex flex-col">
-                <motion.div whileHover={{ y: -4 }} className="neo-card p-6 md:p-8 space-y-6 flex-1 flex flex-col justify-center">
+          <div className="flex justify-center">
+            {/* Direct Email + Info */}
+            <FadeIn delay={0.15}>
+              <div className="space-y-6 max-w-2xl w-full">
+                <motion.div whileHover={{ y: -4 }} className="neo-card p-6 md:p-12 space-y-8 flex flex-col items-center text-center">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-theme-secondary/10 text-theme-secondary text-xs font-bold uppercase tracking-widest w-max">
-                    <Send size={12} /> Direct Email
+                    <Send size={12} /> Direct email
                   </div>
 
-                  <div className="space-y-5">
-                    <div className="flex items-start gap-4 group/item">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-theme-primary to-theme-primary-dark flex items-center justify-center text-theme-text-inverse flex-shrink-0 shadow-glow-primary">
-                        <Send size={22} />
+                  <div className="space-y-5 w-full">
+                    <div className="flex flex-col items-center gap-4 md:gap-6 group/item">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-theme-primary to-theme-primary-dark flex items-center justify-center text-theme-text-inverse shadow-glow-primary">
+                        <Send size={24} className="md:w-7 md:h-7" />
                       </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-theme-text-strong mb-1">Careers Email</h4>
+                      <div className="w-full">
+                        <h4 className="text-[10px] md:text-sm font-bold text-theme-text-strong mb-2 uppercase tracking-tighter">Careers Email</h4>
                         <a
-                          href="mailto:careers@hackitiselabs.in"
-                          className="text-lg font-bold text-theme-primary hover:text-theme-primary-dark transition-colors"
+                          href="mailto:Hr@hackitiselabs.in"
+                          className="text-lg sm:text-2xl md:text-3xl font-black text-theme-primary hover:text-theme-primary-dark transition-colors break-all sm:break-normal"
                         >
-                          careers@hackitiselabs.in
+                          Hr@hackitiselabs.in
                         </a>
-                        <p className="text-xs text-theme-text-muted font-medium mt-1">Send your resume, portfolio, or any questions.</p>
+                        <p className="text-xs md:text-sm text-theme-text-muted font-medium mt-3 max-w-sm mx-auto">Send your resume, portfolio, or any questions directly to our team.</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="h-px bg-theme-border/50" />
+                  <div className="w-full h-px bg-theme-border/50" />
 
-                  <div className="space-y-4">
-                    <h4 className="text-sm font-bold text-theme-text-strong">What to Include</h4>
+                  <div className="space-y-4 w-full text-left max-w-sm mx-auto">
+                    <h4 className="text-[10px] md:text-sm font-bold text-theme-text-strong text-center mb-6 uppercase tracking-widest">What to Include</h4>
                     {[
                       'Your updated resume / CV',
                       'Role you\'re interested in',
@@ -730,14 +728,14 @@ const Careers = () => {
                         <div className="w-5 h-5 rounded-md bg-theme-secondary/10 flex items-center justify-center text-theme-secondary flex-shrink-0">
                           <ChevronRight size={12} />
                         </div>
-                        <span className="text-sm text-theme-text-muted font-medium">{item}</span>
+                        <span className="text-xs md:text-sm text-theme-text-muted font-medium">{item}</span>
                       </div>
                     ))}
                   </div>
                 </motion.div>
 
                 {/* Quick stat bar */}
-                <motion.div whileHover={{ y: -2 }} className="neo-card p-6 flex items-center gap-4">
+                <motion.div whileHover={{ y: -2 }} className="neo-card p-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
                   <div className="w-10 h-10 rounded-xl bg-theme-secondary/10 flex items-center justify-center text-theme-secondary flex-shrink-0">
                     <Wrench size={20} />
                   </div>

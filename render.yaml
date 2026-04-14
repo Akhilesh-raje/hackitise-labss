@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: hackitise-labs
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        fromConnectionPool: true # Or manual URI
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+    staticPublishNum: 0 # Node server serves files

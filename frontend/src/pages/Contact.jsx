@@ -41,24 +41,35 @@ const FloatingIcons = () => {
 /* ═══════════════════════════════════════════════════════════
    CONTACT FORM
    ═══════════════════════════════════════════════════════════ */
+import { api } from '../utils/api';
+
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | sending | sent
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
-    // Simulate submission
-    setTimeout(() => {
+    setErrorMsg('');
+
+    try {
+      await api.post('/contact', formData);
       setStatus('sent');
-      setTimeout(() => setStatus('idle'), 3000);
+      setTimeout(() => setStatus('idle'), 5000);
       setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 1500);
+    } catch (err) {
+      console.error('Contact error:', err);
+      setStatus('error');
+      setErrorMsg(err.message || 'Something went wrong. Please try again or email us directly.');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -146,7 +157,12 @@ const ContactForm = () => {
         {status === 'sending' && (<><Loader2 size={16} className="animate-spin" /> Sending...</>)}
         {status === 'sent' && (<><CheckCircle size={16} /> Sent Successfully!</>)}
       </motion.button>
+
+      {status === 'error' && (
+        <p className="text-xs font-bold text-red-500 mt-2">{errorMsg}</p>
+      )}
     </form>
+
   );
 };
 
@@ -258,114 +274,99 @@ const Contact = () => {
       <section className="px-4 py-16 relative">
         <CyberGrid />
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+          <div className="flex justify-center">
+            {/* Contact Info + Map */}
+            <FadeIn delay={0.15}>
+              <div className="space-y-6 max-w-4xl w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+                  {/* Contact details card */}
+                  <motion.div whileHover={{ y: -4 }} className="neo-card p-6 md:p-10 space-y-8 flex-1">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-theme-secondary/10 text-theme-secondary text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                      <Phone size={12} /> Reach Us Directly
+                    </div>
 
-            {/* Left — Form */}
-            <FadeIn direction="left">
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="neo-card p-6 md:p-8 lg:p-10 h-full"
-              >
-                <div className="space-y-2 mb-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-theme-primary/10 text-theme-primary text-xs font-bold uppercase tracking-widest">
-                    <Send size={12} /> Send a Message
-                  </div>
-                  <h2 className="text-2xl font-black text-theme-text-strong">We'd love to hear from you</h2>
+                    <div className="space-y-6 md:space-y-8">
+                      {/* Phone numbers */}
+                      <div className="flex items-start gap-4 md:gap-5 group/item underline-offset-4">
+                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-theme-primary/10 flex items-center justify-center text-theme-primary flex-shrink-0 group-hover/item:bg-theme-primary group-hover/item:text-theme-text-inverse transition-colors">
+                          <Phone size={18} className="md:w-5 md:h-5" />
+                        </div>
+                        <div>
+                          <h4 className="text-[10px] md:text-sm font-bold text-theme-text-strong mb-1 uppercase tracking-tighter">Phone</h4>
+                          <a href="tel:+919354903995" className="text-sm md:text-lg text-theme-text-muted font-bold hover:text-theme-primary transition-colors block leading-none mb-1">+91 9354903995</a>
+                          <a href="tel:+917087391099" className="text-sm md:text-lg text-theme-text-muted font-bold hover:text-theme-primary transition-colors block leading-none">+91 7087391099</a>
+                        </div>
+                      </div>
+
+                      {/* Email */}
+                      <div className="flex items-start gap-4 md:gap-5 group/item">
+                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-theme-secondary/10 flex items-center justify-center text-theme-secondary flex-shrink-0 group-hover/item:bg-theme-secondary group-hover/item:text-theme-text-inverse transition-colors">
+                          <Mail size={18} className="md:w-5 md:h-5" />
+                        </div>
+                        <div>
+                          <h4 className="text-[10px] md:text-sm font-bold text-theme-text-strong mb-1 uppercase tracking-tighter">Email</h4>
+                          <a href="mailto:info@hackitiselabs.in" className="text-sm md:text-lg text-theme-text-muted font-bold hover:text-theme-secondary transition-colors block">info@hackitiselabs.in</a>
+                        </div>
+                      </div>
+
+                      {/* Address */}
+                      <div className="flex items-start gap-4 md:gap-5 group/item">
+                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-theme-primary/10 flex items-center justify-center text-theme-primary flex-shrink-0 group-hover/item:bg-theme-primary group-hover/item:text-theme-text-inverse transition-colors">
+                          <MapPin size={18} className="md:w-5 md:h-5" />
+                        </div>
+                        <div>
+                          <h4 className="text-[10px] md:text-sm font-bold text-theme-text-strong mb-1 uppercase tracking-tighter">Office</h4>
+                          <p className="text-xs md:text-base text-theme-text-muted font-semibold leading-relaxed">
+                            G L Bajaj Centre for Research and Incubation,<br />
+                            KP III, Greater Noida, UP 201310, India
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Social links */}
+                    <div className="pt-6 border-t border-theme-border/50">
+                      <p className="text-[10px] font-bold text-theme-text-muted uppercase tracking-wider mb-4">Follow Our Defenses</p>
+                      <div className="flex gap-4">
+                        {[
+                          { Icon: Linkedin, href: 'https://www.linkedin.com/company/hackitise-labs/', label: 'LinkedIn' },
+                          { Icon: Instagram, href: 'https://www.instagram.com/hackitiselabs', label: 'Instagram' },
+                          { Icon: Shield, href: 'https://signal.me/#eu/xTN3os84AaS6UoXSgxCLRMDFBIdq7P89U0MUxR0A2ldwiTUAHRBIEo7M6Mfl05i4', label: 'Signal' },
+                          { Icon: Mail, href: 'mailto:info@hackitiselabs.in', label: 'Email' },
+                        ].map(({ Icon, href, label }, idx) => (
+                          <motion.a
+                            key={idx}
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={label}
+                            whileHover={{ y: -3, scale: 1.1 }}
+                            className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-theme-bg border border-theme-border flex items-center justify-center text-theme-text-muted hover:text-theme-primary hover:border-theme-primary/30 hover:shadow-glow-primary transition-all shadow-neo-out hover:shadow-glow-primary/20"
+                          >
+                            <Icon size={18} />
+                          </motion.a>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Map embed */}
+                  <motion.div whileHover={{ y: -2 }} className="neo-card overflow-hidden h-full min-h-[300px] md:min-h-[400px]">
+                    <iframe
+                      title="Hackitise Labs Location"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.5!2d77.4899!3d28.4744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cc14fe6e1e5c9%3A0x3e5b28f8bbf9fe63!2sG%20L%20Bajaj%20Centre%20for%20Research%20and%20Incubation!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="rounded-2xl"
+                    />
+                  </motion.div>
                 </div>
-                <ContactForm />
-              </motion.div>
-            </FadeIn>
-
-            {/* Right — Contact Info + Map */}
-            <FadeIn direction="right" delay={0.15}>
-              <div className="space-y-6 h-full flex flex-col">
-                {/* Contact details card */}
-                <motion.div whileHover={{ y: -4 }} className="neo-card p-6 md:p-8 space-y-6 flex-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-theme-secondary/10 text-theme-secondary text-xs font-bold uppercase tracking-widest">
-                    <Phone size={12} /> Reach Us Directly
-                  </div>
-
-                  <div className="space-y-5">
-                    {/* Phone numbers */}
-                    <div className="flex items-start gap-4 group/item">
-                      <div className="w-10 h-10 rounded-xl bg-theme-primary/10 flex items-center justify-center text-theme-primary flex-shrink-0 group-hover/item:bg-theme-primary group-hover/item:text-theme-text-inverse transition-colors">
-                        <Phone size={18} />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-theme-text-strong">Phone</h4>
-                        <a href="tel:+919354903995" className="text-sm text-theme-text-muted font-medium hover:text-theme-primary transition-colors block">+91 9354903995</a>
-                        <a href="tel:+917087391099" className="text-sm text-theme-text-muted font-medium hover:text-theme-primary transition-colors block">+91 7087391099</a>
-                      </div>
-                    </div>
-
-                    {/* Email */}
-                    <div className="flex items-start gap-4 group/item">
-                      <div className="w-10 h-10 rounded-xl bg-theme-secondary/10 flex items-center justify-center text-theme-secondary flex-shrink-0 group-hover/item:bg-theme-secondary group-hover/item:text-theme-text-inverse transition-colors">
-                        <Mail size={18} />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-theme-text-strong">Email</h4>
-                        <a href="mailto:info@hackitiselabs.in" className="text-sm text-theme-text-muted font-medium hover:text-theme-secondary transition-colors">info@hackitiselabs.in</a>
-                      </div>
-                    </div>
-
-                    {/* Address */}
-                    <div className="flex items-start gap-4 group/item">
-                      <div className="w-10 h-10 rounded-xl bg-theme-primary/10 flex items-center justify-center text-theme-primary flex-shrink-0 group-hover/item:bg-theme-primary group-hover/item:text-theme-text-inverse transition-colors">
-                        <MapPin size={18} />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-theme-text-strong">Office</h4>
-                        <p className="text-sm text-theme-text-muted font-medium leading-relaxed">
-                          G L Bajaj Centre for Research and Incubation,<br />
-                          Knowledge Park III, Greater Noida,<br />
-                          Uttar Pradesh 201310, India
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Social links */}
-                  <div className="pt-4 border-t border-theme-border/50">
-                    <p className="text-xs font-bold text-theme-text-muted uppercase tracking-wider mb-3">Follow Us</p>
-                    <div className="flex gap-3">
-                      {[
-                        { Icon: Linkedin, href: '#', label: 'LinkedIn' },
-                        { Icon: Instagram, href: '#', label: 'Instagram' },
-                        { Icon: MessageCircle, href: '#', label: 'WhatsApp' },
-                        { Icon: Mail, href: 'mailto:info@hackitiselabs.in', label: 'Email' },
-                      ].map(({ Icon, href, label }, idx) => (
-                        <motion.a
-                          key={idx}
-                          href={href}
-                          aria-label={label}
-                          whileHover={{ y: -3, scale: 1.1 }}
-                          className="w-10 h-10 rounded-xl bg-theme-bg border border-theme-border flex items-center justify-center text-theme-text-muted hover:text-theme-primary hover:border-theme-primary/30 hover:shadow-glow-primary transition-all"
-                        >
-                          <Icon size={18} />
-                        </motion.a>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Map embed */}
-                <motion.div whileHover={{ y: -2 }} className="neo-card overflow-hidden h-[200px]">
-                  <iframe
-                    title="Hackitise Labs Location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.5!2d77.4899!3d28.4744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cc14fe6e1e5c9%3A0x3e5b28f8bbf9fe63!2sG%20L%20Bajaj%20Centre%20for%20Research%20and%20Incubation!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="rounded-2xl"
-                  />
-                </motion.div>
               </div>
             </FadeIn>
-
           </div>
         </div>
       </section>
@@ -385,7 +386,7 @@ const Contact = () => {
                 How Can We Help You?
               </h2>
               <p className="text-base md:text-lg text-theme-text-muted font-medium max-w-2xl mx-auto">
-                Choose the area that fits your needs — we'll connect you with the right team.
+                Choose the area that fits your needs — connect with us directly.
               </p>
             </div>
           </FadeIn>
@@ -394,52 +395,46 @@ const Contact = () => {
 
             {/* Training */}
             <InfoCard icon={GraduationCap} title="Training" color="primary">
-              <p className="text-sm text-theme-text-muted font-medium leading-relaxed mb-4">
+              <p className="text-sm text-theme-text-muted font-bold leading-relaxed mb-4">
                 Expert cybersecurity training for all skill levels — schools, colleges, and corporates.
               </p>
               <motion.a
                 href="/services#training"
                 whileHover={{ x: 4 }}
-                className="inline-flex items-center gap-2 text-sm font-bold text-theme-primary"
+                className="inline-flex items-center gap-2 text-sm font-black text-theme-primary uppercase tracking-tighter"
               >
-                View Programs <ArrowRight size={14} />
+                Explore Training <ArrowRight size={14} />
               </motion.a>
             </InfoCard>
 
             {/* Consulting */}
             <InfoCard icon={Briefcase} title="Consulting" color="secondary">
-              <div className="space-y-2 mb-4">
-                <a href="tel:+919354903995" className="flex items-center gap-2 text-sm text-theme-text-muted font-medium hover:text-theme-secondary transition-colors">
-                  <Phone size={14} /> +91 9354903995
+              <div className="space-y-3 mb-2 pt-1">
+                <a href="tel:+919354903995" className="flex items-center gap-3 text-sm text-theme-text-muted font-bold hover:text-theme-secondary transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-theme-secondary/10 flex items-center justify-center"><Phone size={14} /></div> +91 9354903995
                 </a>
-                <a href="tel:+917087391099" className="flex items-center gap-2 text-sm text-theme-text-muted font-medium hover:text-theme-secondary transition-colors">
-                  <Phone size={14} /> +91 7087391099
+                <a href="tel:+917087391099" className="flex items-center gap-3 text-sm text-theme-text-muted font-bold hover:text-theme-secondary transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-theme-secondary/10 flex items-center justify-center"><Phone size={14} /></div> +91 7087391099
                 </a>
-                <a href="mailto:info@hackitiselabs.in" className="flex items-center gap-2 text-sm text-theme-text-muted font-medium hover:text-theme-secondary transition-colors">
-                  <Mail size={14} /> info@hackitiselabs.in
+                <a href="mailto:info@hackitiselabs.in" className="flex items-center gap-3 text-sm text-theme-text-muted font-bold hover:text-theme-secondary transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-theme-secondary/10 flex items-center justify-center"><Mail size={14} /></div> info@hackitiselabs.in
                 </a>
               </div>
             </InfoCard>
 
             {/* R&D */}
             <InfoCard icon={FlaskConical} title="Research & Development" color="primary">
-              <p className="text-sm text-theme-text-muted font-medium leading-relaxed mb-4">
-                Have a research idea or want to collaborate? Drop your email and we'll reach out.
+              <p className="text-sm text-theme-text-muted font-bold leading-relaxed mb-6">
+                Have a research idea or want to collaborate? Connect with our R&D wing directly via email.
               </p>
-              <div className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="Your email for contact"
-                  className="w-full px-4 py-2.5 rounded-xl bg-theme-bg border border-theme-border text-theme-text text-sm font-medium placeholder:text-theme-text-muted/50 focus:outline-none focus:border-theme-primary/50 focus:shadow-glow-primary transition-all"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full px-6 py-2.5 rounded-full bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse font-bold text-sm shadow-glow-primary hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                >
-                  Submit your inquiry now <ArrowRight size={14} />
-                </motion.button>
-              </div>
+              <motion.a
+                href="mailto:info@hackitiselabs.in"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full px-6 py-3.5 rounded-full bg-gradient-to-r from-theme-primary to-theme-primary-dark text-theme-text-inverse font-black text-sm shadow-glow-primary hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+              >
+                Email R&D Proposal <ArrowRight size={16} />
+              </motion.a>
             </InfoCard>
 
           </StaggerContainer>

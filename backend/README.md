@@ -1,33 +1,57 @@
-# ⚙️ Hackitise Labs - Backend API
+# ⚙️ Hackitise Labs — Backend API
 
-This is the central API service for the Hackitise Labs platform, built with **Express 5** and **TypeScript 6**.
+RESTful API service powering the Hackitise Labs platform. Built with **Express 5**, **TypeScript**, and **MongoDB**.
 
-## 🚀 Development
+## Scripts
 
-### Scripts
-- `npm run dev`: Start the server in watch mode using `tsx`.
-- `npm run build`: Build the TypeScript project.
-- `npm run start`: Run the compiled server.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server with hot-reload (`tsx watch`) |
+| `npm run build` | Compile TypeScript to `dist/` |
+| `npm start` | Run compiled production server |
+| `npm run seed` | Populate MongoDB with initial site content |
+| `npm test` | Run test suite (Vitest) |
 
-## 📡 API Endpoints
+## Folder Structure
 
-### Health Check
-- **GET** `/health`
-  - Status check for infrastructure monitoring.
+```
+src/
+├── config/
+│   ├── db.ts          # MongoDB connection handler
+│   └── env.ts         # Centralized environment config
+├── middleware/
+│   ├── auth.ts        # JWT authentication & route protection
+│   └── upload.ts      # Multer file upload config
+├── models/
+│   ├── Admin.ts       # Admin user schema (bcrypt password hashing)
+│   ├── Application.ts # Career application schema
+│   ├── BlogPost.ts    # Blog post schema
+│   ├── CaseStudy.ts   # Case study schema
+│   ├── Contact.ts     # Contact inquiry schema
+│   ├── FAQ.ts         # FAQ schema
+│   ├── JobListing.ts  # Job listing schema
+│   └── Testimonial.ts # Testimonial schema
+├── routes/
+│   ├── auth.ts        # Login, /me endpoints
+│   ├── applications.ts
+│   ├── blog.ts
+│   ├── caseStudies.ts
+│   ├── contact.ts
+│   ├── faqs.ts
+│   ├── jobs.ts
+│   └── testimonials.ts
+├── scripts/
+│   └── seed.ts        # Database seeder (migrates hardcoded content)
+├── utils/
+│   └── mailer.ts      # Nodemailer email utility
+└── index.ts           # Express app entry point
+```
 
-### Profile
-- **GET** `/api/v1/profile`
-  - Returns mock administrative profile data.
+## Security
 
-### Contact
-- **POST** `/api/v1/contact`
-  - Receives contact form submissions (currently mocks successful receipt).
-
-## 🛠️ Tech Stack
-- **Express 5**: Fast, unopinionated, minimalist web framework.
-- **TypeScript 6**: Type-safe development with modern JS features.
-- **Cors**: Middleware to enable Cross-Origin Resource Sharing.
-- **tsx**: Modern TypeScript runtime and bundler.
-
-## 📂 Folder Structure
-- `src/index.ts`: Application entry point and route definitions.
+- **Authentication**: JWT tokens with configurable expiry
+- **Password Hashing**: bcrypt with automatic salting
+- **Headers**: Helmet middleware
+- **Rate Limiting**: express-rate-limit on all endpoints
+- **CORS**: Configurable origin whitelist
+- **File Uploads**: Filtered by MIME type, stored in `uploads/`
