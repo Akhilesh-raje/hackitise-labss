@@ -11,6 +11,7 @@ import drSaryuImg from '../assets/team/dr-saryu-mishra.jpg';
 import drHnImg from '../assets/team/dr-hn-dutta.jpg';
 import drDeepakImg from '../assets/team/dr-deepak.jpg';
 import yugalImg from '../assets/team/yugal-pathak.avif';
+import namanImg from '../assets/team/naman.jpeg'
 
 
 
@@ -337,12 +338,20 @@ const About = () => {
                 img: drSaryuImg
               },
               {
-                name: 'Mr. Yugal Pathak',
-                role: 'Advisor, Cybersecurity & Digital Forensics Expert',
+                name: 'Dr. H.N. Dutta',
+                role: 'Honorary Mentor, R&D Expert',
+                exp: 'Retired Scientist-G from National Physical Laboratory. 30+ years R&D expertise in atmospheric instrumentation and Antarctic science. Pioneer in Acoustic Sounders.',
+                desc: 'Dr. Dutta provides strategic guidance in advancing cybersecurity and R&D initiatives.',
+                icon: Cpu,
+                img: drHnImg
+              },
+              {
+                name: 'Naman Jain',
+                role: 'Vice-Chairman Silver Line Prestige School, Director Magnum Exports',
                 exp: "Expert in Digital Forensics and Incident Response (DFIR) across corporate and government sectors. Contributed to national security and led 'Make in India' forensic hardware R&D.",
-                desc: 'Seasoned trainer and speaker dedicated to securing digital borders with expertise and innovation.',
+                desc: 'Progressive learning pioneer who is on the mission to democratise the International education system.',
                 icon: Shield,
-                img: yugalImg
+                img: namanImg
               },
               {
                 name: 'Dr. Deepak (D3)',
@@ -352,14 +361,7 @@ const About = () => {
                 icon: Terminal,
                 img: drDeepakImg
               },
-              {
-                name: 'Dr. H.N. Dutta',
-                role: 'Honorary Mentor, R&D Expert',
-                exp: 'Retired Scientist-G from National Physical Laboratory. 30+ years R&D expertise in atmospheric instrumentation and Antarctic science. Pioneer in Acoustic Sounders.',
-                desc: 'Dr. Dutta provides strategic guidance in advancing cybersecurity and R&D initiatives.',
-                icon: Cpu,
-                img: drHnImg
-              }
+             
             ].map((mentor, idx) => (
               <StaggerItem key={idx}>
                 <motion.div
