@@ -347,7 +347,7 @@ const About = () => {
               {
                 name: 'Naman Jain',
                 role: 'Vice-Chairman Silver Line Prestige School, Director Magnum Exports',
-                exp: "Expert in Digital Forensics and Incident Response (DFIR) across corporate and government sectors. Contributed to national security and led 'Make in India' forensic hardware R&D.",
+                exp: "Education leader driving the transformation of Indian schooling by integrating global, experiential learning models to make international-quality education accessible and future-ready.",
                 desc: 'Progressive learning pioneer who is on the mission to democratise the International education system.',
                 icon: Shield,
                 img: namanImg
