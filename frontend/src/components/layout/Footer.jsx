@@ -49,7 +49,7 @@ const Footer = () => {
       
       <div className="pt-8 border-t border-theme-border/30 flex flex-col md:flex-row items-center justify-between gap-6 px-4">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-              <p className="text-[10px] text-theme-text-muted font-bold uppercase tracking-widest">&copy; 2026 Hackitise Labs.</p>
+              <p className="text-[10px] text-theme-text-muted font-bold uppercase tracking-widest">&copy; 2026 Hackitise Labs. All rights reserved.</p>
               {/* 
               <div className="flex gap-6">
                   <a href="/contact" className="text-[10px] text-theme-text-muted hover:text-theme-primary font-black uppercase tracking-tighter">Privacy</a>

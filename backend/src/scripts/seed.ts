@@ -8,6 +8,7 @@ import Testimonial from '../models/Testimonial.js';
 import JobListing from '../models/JobListing.js';
 import FAQ from '../models/FAQ.js';
 import CaseStudy from '../models/CaseStudy.js';
+import CertificationProgram from '../models/CertificationProgram.js';
 
 const seed = async () => {
   await connectDB();
@@ -21,6 +22,7 @@ const seed = async () => {
     JobListing.deleteMany({}),
     FAQ.deleteMany({}),
     CaseStudy.deleteMany({}),
+    CertificationProgram.deleteMany({}),
   ]);
 
   // === ADMIN ===
@@ -91,6 +93,95 @@ const seed = async () => {
     },
   ]);
   console.log('✅ Case studies seeded');
+
+  // === CERTIFICATION PROGRAMS ===
+  await CertificationProgram.insertMany([
+    {
+      title: 'Advanced VAPT Certification',
+      code: 'VAPT-101',
+      description: 'Comprehensive penetration testing course covering web, network, and mobile application security. Learn industry-standard tools and methodologies.',
+      duration: '40 hours',
+      level: 'Advanced',
+      skills: ['VAPT', 'Network Security', 'Web App Testing', 'Burp Suite', 'Metasploit'],
+      price: 15000,
+      currency: 'INR',
+      color: 'primary',
+      icon: 'ShieldAlert',
+      published: true,
+      order: 1,
+    },
+    {
+      title: 'Digital Forensics & Incident Response',
+      code: 'DFIR-101',
+      description: 'Master the art of digital forensics and incident response. Learn to investigate cyber crimes and respond to security incidents effectively.',
+      duration: '35 hours',
+      level: 'Intermediate',
+      skills: ['DFIR', 'Forensics Tools', 'Incident Response', 'Evidence Collection'],
+      price: 12000,
+      currency: 'INR',
+      color: 'secondary',
+      icon: 'Search',
+      published: true,
+      order: 2,
+    },
+    {
+      title: 'Secure Coding Practices',
+      code: 'SECURE-101',
+      description: 'Learn to write secure code and prevent common vulnerabilities. Covers OWASP Top 10 and secure SDLC practices.',
+      duration: '30 hours',
+      level: 'Intermediate',
+      skills: ['Secure Coding', 'OWASP', 'Code Review', 'SAST/DAST'],
+      price: 10000,
+      currency: 'INR',
+      color: 'primary',
+      icon: 'Code',
+      published: true,
+      order: 3,
+    },
+    {
+      title: 'Malware Analysis Fundamentals',
+      code: 'MALWARE-101',
+      description: 'Dive deep into malware analysis techniques. Learn static and dynamic analysis, reverse engineering basics, and threat intelligence.',
+      duration: '45 hours',
+      level: 'Advanced',
+      skills: ['Malware Analysis', 'Reverse Engineering', 'IDA Pro', 'Threat Intel'],
+      price: 18000,
+      currency: 'INR',
+      color: 'secondary',
+      icon: 'Bug',
+      published: true,
+      order: 4,
+    },
+    {
+      title: 'Network Security Essentials',
+      code: 'NET-SEC-101',
+      description: 'Foundation course covering network protocols, firewalls, IDS/IPS, and network security best practices.',
+      duration: '25 hours',
+      level: 'Beginner',
+      skills: ['Network Security', 'Firewalls', 'IDS/IPS', 'Wireshark'],
+      price: 8000,
+      currency: 'INR',
+      color: 'primary',
+      icon: 'Network',
+      published: true,
+      order: 5,
+    },
+    {
+      title: 'Cloud Security (AWS/Azure)',
+      code: 'CLOUD-SEC-101',
+      description: 'Secure cloud infrastructure and applications. Covers AWS and Azure security services, IAM, encryption, and compliance.',
+      duration: '32 hours',
+      level: 'Intermediate',
+      skills: ['Cloud Security', 'AWS', 'Azure', 'IAM', 'Compliance'],
+      price: 14000,
+      currency: 'INR',
+      color: 'secondary',
+      icon: 'Cloud',
+      published: true,
+      order: 6,
+    },
+  ]);
+  console.log('✅ Certification programs seeded');
 
   console.log('\n🎉 Database seeded successfully!');
   await mongoose.disconnect();

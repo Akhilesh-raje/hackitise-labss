@@ -32,11 +32,12 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Careers', path: '/careers' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/', external: false },
+    { name: 'About', path: '/about', external: false },
+    { name: 'Services', path: '/services', external: false },
+    { name: 'Certification', path: 'https://cert.hackitiselabs.in/', external: true },
+    { name: 'Careers', path: '/careers', external: false },
+    { name: 'Contact', path: '/contact', external: false },
   ];
 
   return (
@@ -50,17 +51,29 @@ const Navbar = () => {
         {/* Center Links (Desktop) */}
         <div className="hidden md:flex items-center space-x-1 bg-theme-bg/50 rounded-full p-1 shadow-neo-in">
           {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
-                location.pathname === link.path
-                  ? 'bg-theme-card shadow-neo-out text-theme-primary-dark'
-                  : 'text-theme-text-muted hover:text-theme-primary'
-              }`}
-            >
-              {link.name}
-            </Link>
+            link.external ? (
+              <a
+                key={link.name}
+                href={link.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2 rounded-full text-sm font-bold transition-all text-theme-text-muted hover:text-theme-primary"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
+                  location.pathname === link.path
+                    ? 'bg-theme-card shadow-neo-out text-theme-primary-dark'
+                    : 'text-theme-text-muted hover:text-theme-primary'
+                }`}
+              >
+                {link.name}
+              </Link>
+            )
           ))}
         </div>
 
@@ -112,16 +125,27 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + idx * 0.05 }}
                   >
-                    <Link
-                      to={link.path}
-                      className={`block py-4 px-6 rounded-2xl text-lg font-black transition-all ${
-                        location.pathname === link.path
-                          ? 'bg-theme-primary/10 text-theme-primary shadow-neo-in'
-                          : 'text-theme-text-muted hover:text-theme-primary'
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
+                    {link.external ? (
+                      <a
+                        href={link.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block py-4 px-6 rounded-2xl text-lg font-black transition-all text-theme-text-muted hover:text-theme-primary"
+                      >
+                        {link.name}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.path}
+                        className={`block py-4 px-6 rounded-2xl text-lg font-black transition-all ${
+                          location.pathname === link.path
+                            ? 'bg-theme-primary/10 text-theme-primary shadow-neo-in'
+                            : 'text-theme-text-muted hover:text-theme-primary'
+                        }`}
+                      >
+                        {link.name}
+                      </Link>
+                    )}
                   </motion.div>
                 ))}
               </div>

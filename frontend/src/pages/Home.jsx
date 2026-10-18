@@ -6,7 +6,7 @@ import MainFeature from '../components/sections/MainFeature';
 import Proof from '../components/sections/Proof';
 import WhyYou from '../components/sections/WhyYou';
 import CaseStudy from '../components/sections/CaseStudy';
-import Team from '../components/sections/Team';
+import LogoCarousel from '../components/sections/LogoCarousel';
 import Blog from '../components/sections/Blog';
 import FAQ from '../components/sections/FAQ';
 import Testimonials from '../components/sections/Testimonials';
@@ -35,31 +35,29 @@ const Home = () => {
         <Services />
       </section>
       
-      {/* 4. PRODUCT / CAPABILITY */}
+      {/* 4. PARTNERS LOGO CAROUSEL */}
+      <LogoCarousel />
+      
+      {/* 5. PRODUCT / CAPABILITY */}
       <section className="px-4">
         <MainFeature />
       </section>
       
-      {/* 5. PROOF (NUMBERS) */}
+      {/* 6. PROOF (NUMBERS) */}
       <section className="px-4">
         <Proof />
       </section>
       
-      {/* 6. WHY YOU (DIFFERENTIATION) */}
+      {/* 7. WHY YOU (DIFFERENTIATION) */}
       <section className="px-4">
         <WhyYou />
       </section>
       
-      {/* 7. CASE STUDIES / REAL IMPACT */}
+      {/* 8. CASE STUDIES / REAL IMPACT */}
       <section className="px-4">
         <CaseStudy />
       </section>
       
-      {/* 8. TEAM / ADVISORS */}
-      <section className="px-4">
-        <Team />
-      </section>
-
       {/* 9. TESTIMONIALS */}
       <section className="px-4">
         <Testimonials />

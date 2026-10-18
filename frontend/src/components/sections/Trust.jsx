@@ -6,7 +6,7 @@ import { FadeIn } from '../ui/AnimationUtils';
 const Trust = () => {
   const items = [
     { icon: Award, label: 'ISO 27001 Certified' },
-    { icon: Award, label: 'ISO 9001B Certified' },
+    { icon: Award, label: 'ISO 9001 Certified' },
     { icon: Building, label: 'Govt Affiliated' },
     { icon: UserCheck, label: 'Top Security Mentors' },
   ];

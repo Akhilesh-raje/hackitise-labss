@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ShieldCheck, Target, Award, Users, MapPin, Globe, ArrowRight, Lock, Wifi, Zap, Terminal, Shield, Cpu, Database, Eye } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem, AnimatedCounter, CyberGrid } from '../components/ui/AnimationUtils';
+import LogoCarousel from '../components/sections/LogoCarousel';
 
 // Team Image Imports
 import nikunjImg from '../assets/team/nikunj-kaushik.jpeg';
@@ -10,6 +11,7 @@ import suryanshImg from '../assets/team/suryansh-deshwal.jpeg';
 import drSaryuImg from '../assets/team/dr-saryu-mishra.jpg';
 import drHnImg from '../assets/team/dr-hn-dutta.jpg';
 import drDeepakImg from '../assets/team/dr-deepak.jpg';
+import drSubhashImg from '../assets/team/dr-subhash-jain.jpg';
 import yugalImg from '../assets/team/yugal-pathak.avif';
 import namanImg from '../assets/team/naman.jpeg'
 
@@ -211,6 +213,9 @@ const About = () => {
         </div>
       </section>
 
+      {/* ═══ PARTNERS LOGO CAROUSEL ═══ */}
+      <LogoCarousel />
+
       {/* ═══ 3. MISSION & GOAL ═══ */}
       <section className="bg-theme-bg/30 py-24 border-y border-theme-border/50 relative overflow-hidden">
         <CyberGrid />
@@ -337,6 +342,14 @@ const About = () => {
                 img: drSaryuImg
               },
               {
+                name: 'Dr. Subhash Jain',
+                role: 'Honorary Mentor',
+                exp: 'Founder & Chairman of Silver Line Educational Trust. Leading Tax Consultant of northern region. President of Uttarakhand Self Finance Engineering College Association, Vice President of U.P. Technical Institutions Foundation (UPTIF), President of Independent Schools\' Federation of India (Regd.) District Ghaziabad.',
+                desc: 'Dr. Jain brings extensive leadership experience and strategic guidance to educational and institutional development.',
+                icon: Award,
+                img: drSubhashImg
+              },
+              {
                 name: 'Dr. H.N. Dutta',
                 role: 'Honorary Mentor, R&D Expert',
                 exp: 'Retired Scientist-G from National Physical Laboratory. 30+ years R&D expertise in atmospheric instrumentation and Antarctic science. Pioneer in Acoustic Sounders.',
@@ -352,6 +365,7 @@ const About = () => {
                 icon: Shield,
                 img: namanImg
               },
+              /*
               {
                 name: 'Dr. Deepak (D3)',
                 role: 'Honorary Mentor, Cyber Forensics & Investigation',
@@ -360,6 +374,18 @@ const About = () => {
                 icon: Terminal,
                 img: drDeepakImg
               },
+              */
+              /*
+              // Template for 6th member - uncomment and fill in details
+              {
+                name: 'Full Name Here',
+                role: 'Title/Position Here',
+                exp: 'Brief background, experience, and credentials here. Include key achievements, positions held, and relevant expertise.',
+                desc: 'Value proposition - what strategic guidance or expertise they bring to Hackitise Labs.',
+                icon: Award, // Options: Award, Shield, Terminal, Cpu, Users, etc.
+                img: null // Add image: import personImg from '../assets/team/person-name.jpg'; then use: img: personImg
+              },
+              */
 
             ].map((mentor, idx) => (
               <StaggerItem key={idx}>
@@ -413,21 +439,21 @@ const About = () => {
             {[
               {
                 name: 'NIKUNJ KAUSHIK',
-                role: 'Co-Founder and Director',
+                role: 'CEO',
                 quote: 'The ultimate shield against cyber chaos, making hackers think twice.',
                 img: nikunjImg,
                 gradient: 'from-theme-primary to-theme-primary-dark'
               },
               {
                 name: 'ADITYA JHA',
-                role: 'Co-Founder and Director',
+                role: 'COO',
                 quote: 'Wielding exploits like a magician turning vulnerabilities into victory.',
                 img: adityaImg,
                 gradient: 'from-theme-secondary to-theme-secondary-dark'
               },
               {
                 name: 'SURYANSH DESHWAL',
-                role: 'Co-Founder and CTO',
+                role: 'CTO',
                 quote: 'Architecting resilient systems and turning complex challenges into secure, scalable solutions.',
                 img: suryanshImg,
                 gradient: 'from-theme-primary to-theme-secondary-dark'
@@ -465,13 +491,6 @@ const About = () => {
                   <div className="space-y-2 relative z-10">
                     <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-theme-text-strong leading-tight min-h-[3.5rem] md:min-h-[4rem] flex items-center justify-center">{leader.name}</h3>
                     <div className="text-theme-primary font-bold text-[10px] md:text-xs lg:text-sm uppercase tracking-widest">{leader.role}</div>
-                  </div>
-
-                  {/* Quote card */}
-                  <div className="relative glass-card p-5 border border-theme-primary/10 w-full z-10 mt-auto">
-                    <p className="italic text-theme-text-muted font-medium text-xs md:text-sm leading-relaxed text-center">
-                      "{leader.quote}"
-                    </p>
                   </div>
                 </motion.div>
               </FadeIn>

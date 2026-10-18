@@ -20,6 +20,7 @@ import testimonialRoutes from './routes/testimonials.js';
 import jobRoutes from './routes/jobs.js';
 import faqRoutes from './routes/faqs.js';
 import caseStudyRoutes from './routes/caseStudies.js';
+import certificateRoutes from './routes/certificates.js';
 
 const app = express();
 
@@ -89,6 +90,7 @@ app.use('/api/v1/testimonials', testimonialRoutes);
 app.use('/api/v1/jobs', jobRoutes);
 app.use('/api/v1/faqs', faqRoutes);
 app.use('/api/v1/case-studies', caseStudyRoutes);
+app.use('/api/v1/certificates', certificateRoutes);
 
 // ──────────────────────────────────────────────────────────
 // SERVE FRONTEND IN PRODUCTION
